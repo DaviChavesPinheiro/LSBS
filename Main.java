@@ -46,25 +46,6 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        try {
- 
-            File file = new File("./white-lsb.png");
-            
-            BufferedImage bi = ImageIO.read(file);
-            int secret = 0b00000000000000000000000000000000;
-            int mask =   0b00000001000000010000000100000001;
-            for (int h = 0; h < bi.getHeight(); h++) {
-                for (int w = 0; w < bi.getWidth(); w++) {
-                    int color = bi.getRGB(w, h);
-                    System.out.print(Integer.toBinaryString(color & mask) + " ");
-                }
-                System.out.println();
-            }
-            
-    
-        } catch (IOException e) {
-            System.out.println("Exception occured :" + e.getMessage());
-        }
        
     }
 }
