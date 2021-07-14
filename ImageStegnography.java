@@ -11,6 +11,8 @@ public abstract class ImageStegnography {
     BufferedImage image;
     List<File> files = new ArrayList<File>();
 
+    public ImageStegnography() {}
+
     public ImageStegnography(String path) throws Exception {
         this.setImage(path);
     }
