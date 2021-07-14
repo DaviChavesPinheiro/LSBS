@@ -2,7 +2,6 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.InputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.image.BufferedImage;
@@ -29,19 +28,21 @@ public abstract class ImageStegnography {
         this.source = null;
     }
 
-    public void addFile(String path) throws Exception, FileNotFoundException {
-        files.add(new File(path));
+    public File addFile(String path) throws Exception {
+        File file = new File(path);
+        files.add(file);
+        return file;
     }
 
-    public void removeFile() {
-        // Implementar
+    public void removeFile(File file) {
+        files.remove(file);
     }
 
     public abstract void encode();
 
     public abstract void decode(String path);
 
-    public byte[] getBytesToEncode() throws Exception, FileNotFoundException {
+    public byte[] getBytesToEncode() throws Exception {
         File file = files.get(0);
 
         byte[] allBytes = new byte[(int)file.length()];
@@ -51,6 +52,15 @@ public abstract class ImageStegnography {
         inputStream.read(allBytes);
         
         return allBytes;
+    }
+
+    // Retorna a soma do tamanho de todos os arquivos
+    public long getCurrentFilesSize() {
+        long sum = 0;
+        for (File file : files) {
+            sum += file.length();
+        }
+        return sum;
     }
 
     // Retorna o número de bytes máximo que o source pode armazenar

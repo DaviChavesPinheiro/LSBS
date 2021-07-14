@@ -56,6 +56,14 @@ public class LSBStegnography extends ImageStegnography {
     }
 
     @Override
+    public File addFile(String path) throws Exception {
+        File file = new File(path);
+
+        if(getCurrentFilesSize() + file.length() > getMaxSpaceAvailable()) throw new Exception("[Error]: Cabou o espaco brother");
+        return super.addFile(path);
+    }
+
+    @Override
     public void encode() {
         try {
             BufferedImage image = ImageIO.read(this.source);
@@ -88,8 +96,6 @@ public class LSBStegnography extends ImageStegnography {
             System.out.println("Exception occured:" + e.getMessage());
         }
     }
-
-    
 
     @Override
     public void decode(String path) {
