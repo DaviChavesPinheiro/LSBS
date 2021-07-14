@@ -10,7 +10,7 @@ public class LSBStegnography extends ImageStegnography {
         super(path);
     }
 
-    public byte[] concatWithArrayCopy(byte[] array1, byte[] array2) {
+    public byte[] concatWithArrays(byte[] array1, byte[] array2) {
         byte[] bytes = new byte[array1.length + array2.length];
         for (int i = 0; i < array1.length; i++) {
             bytes[i] = array1[i];
@@ -23,41 +23,67 @@ public class LSBStegnography extends ImageStegnography {
         return bytes;
     }
 
+    public byte getByte(int num, int bn) {
+        return (byte)((num & (0xFF << (bn * 8))) >> (bn * 8));
+    }
+
+    public int getHalfByte(int num, int bn) {
+        return ((num & (0xF << (bn * 4))) >> (bn * 4)) & 0xF;
+    }
+
+    public int getBit(int num, int n) {
+        return ((num & (0b1 << n)) >> n) & 0b1;
+    }
+
+    public int setBit(int num, int bit, int n) {
+        num = num & (~(0b1 << n));
+        return (num | ((bit & 0b1) << n));
+    }
+
     @Override
     public void encode() {
         try {
-            byte[] bytes = this.concatWithArrayCopy(new byte[4], getBytesToEncode());
+            byte[] fileBytes = getBytesToEncode();
+            byte[] bytes = this.concatWithArrays(new byte[4], fileBytes);
 
-            int bytesToEncodeSize = bytes.length - 4;
-            bytes[0] = (byte)(bytesToEncodeSize & 0xFF000000);
-            bytes[1] = (byte)(bytesToEncodeSize & 0x00FF0000);
-            bytes[2] = (byte)(bytesToEncodeSize & 0x0000FF00);
-            bytes[3] = (byte)(bytesToEncodeSize & 0x000000FF);
+            System.out.println("fileBytes: " + fileBytes.length);
+            System.out.println("bytes: " + bytes.length);
 
-            for (int i = 0; i < 2 * bytes.length; i++) {
-                int imageX = i % image.getWidth();
-                int imageY = Math.floorDiv(i, image.getHeight());
+            int bytesToEncodeSize = fileBytes.length;
+            System.out.println("bytesToEncodeSize: " + Integer.toBinaryString(bytesToEncodeSize));
+            bytes[0] = getByte(bytesToEncodeSize, 3);
+            bytes[1] = getByte(bytesToEncodeSize, 2);
+            bytes[2] = getByte(bytesToEncodeSize, 1);
+            bytes[3] = getByte(bytesToEncodeSize, 0);
 
+            System.out.println("bytes[0]: " + bytes[0]);
+            System.out.println("bytes[1]: " + bytes[1]);
+            System.out.println("bytes[2]: " + bytes[2]);
+            System.out.println("bytes[3]: " + bytes[3]);
+
+            for (int bn = 0; bn < bytes.length * 8; bn++) {
+            // for (int bn = 0; bn < 4 * 8; bn++) {
+                int pn = Math.floorDiv(bn, 3);
+                int imageX = pn % image.getWidth();
+                int imageY = Math.floorDiv(pn, image.getHeight());
                 int color = image.getRGB(imageX, imageY);
-                int byt = bytes[i >> 1];
 
-                if(i % 2 == 0) {
-                    byt = (byt & 0b11110000) >> 4;
-                } else {
-                    byt = byt & 0b00001111;
-                }
+                int byt = bytes[bn >> 3];
+                int bit = getBit(byt, 7 - (bn % 8));
 
-                color = color & 0b11111110111111101111111011111110;
-                int mask = 0b00000000000000000000000000000000;
-                for (int j = 0; j < 4; j++) {
-                    int bit = (byt >> j) & 0b00000001;
-                    mask = mask | (bit << (j * 8));
-                }
-
-                color = color | mask;
+                color = setBit(color, bit, (2 - (bn % 3)) * 8);
 
                 image.setRGB(imageX, imageY, color);
             }
+
+            // for (int i = 0; i < 11; i++) {
+            //     int imageX = i % image.getWidth();
+            //     int imageY = Math.floorDiv(i, image.getHeight());
+
+            //     int color = image.getRGB(imageX, imageY);
+
+            //     System.out.println(Integer.toBinaryString(color));
+            // }
 
             ImageIO.write(image, "png", new File("./out.png"));
         } catch (Exception e) {
@@ -128,29 +154,29 @@ public class LSBStegnography extends ImageStegnography {
             int hideFileSize = extractIntFromColors(buffer);
             System.out.println(hideFileSize);
 
-            int buffer2[] = new int[2];
-            byte lsbImageBytes[] = new byte[hideFileSize];
-            for (int i = 8; i < 8 + (hideFileSize * 2); i++) {
-                int imageX = i % lsbImage.getWidth();
-                int imageY = Math.floorDiv(i, lsbImage.getHeight());
+            // int buffer2[] = new int[2];
+            // byte lsbImageBytes[] = new byte[hideFileSize];
+            // for (int i = 8; i < 8 + (hideFileSize * 2); i++) {
+            //     int imageX = i % lsbImage.getWidth();
+            //     int imageY = Math.floorDiv(i, lsbImage.getHeight());
 
-                int color = lsbImage.getRGB(imageX, imageY);
+            //     int color = lsbImage.getRGB(imageX, imageY);
 
-                buffer2[i % 2] = color;
+            //     buffer2[i % 2] = color;
 
-                if(i % 2 == 1) {
-                    lsbImageBytes[(i >> 1) - 4] = extractByteFromColors(buffer2);
-                }
-            }
+            //     if(i % 2 == 1) {
+            //         lsbImageBytes[(i >> 1) - 4] = extractByteFromColors(buffer2);
+            //     }
+            // }
 
-            File hiddenFile = new File("secret.png");
+            // File hiddenFile = new File("secret.png");
 
-            OutputStream stream = new FileOutputStream(hiddenFile);
-            stream.write(lsbImageBytes);
-            stream.close();
+            // OutputStream stream = new FileOutputStream(hiddenFile);
+            // stream.write(lsbImageBytes);
+            // stream.close();
 
             
-            System.out.println();
+            // System.out.println();
            
 
         } catch (Exception e) {
