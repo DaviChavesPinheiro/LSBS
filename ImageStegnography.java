@@ -42,7 +42,7 @@ public abstract class ImageStegnography {
 
     public abstract void decode(String path);
 
-    public byte[] getBytesToEncode() throws Exception {
+    public byte[] getFileBytes() throws Exception {
         File file = files.get(0);
 
         byte[] allBytes = new byte[(int)file.length()];

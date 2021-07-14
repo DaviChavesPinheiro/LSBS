@@ -67,7 +67,7 @@ public class LSBStegnography extends ImageStegnography {
     public void encode() {
         try {
             BufferedImage image = ImageIO.read(this.source);
-            byte[] fileBytes = getBytesToEncode();
+            byte[] fileBytes = getFileBytes();
             byte[] bytes = this.concatWithArrays(new byte[4], fileBytes);
 
 
