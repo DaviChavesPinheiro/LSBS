@@ -1,4 +1,7 @@
 .vscode
+
 *.class
+
 out.png
+
 secret.png

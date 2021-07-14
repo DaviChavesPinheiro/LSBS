@@ -8,25 +8,25 @@ import java.util.List;
 import java.awt.image.BufferedImage;
 
 public abstract class ImageStegnography {
-    BufferedImage image;
+    File source;
     List<File> files = new ArrayList<File>();
 
     public ImageStegnography() {}
 
     public ImageStegnography(String path) throws Exception {
-        this.setImage(path);
+        this.setSource(path);
     }
 
-    public void setImage(String path) throws Exception {
+    public void setSource(String path) throws Exception {
         File file = new File(path);
-
-        image = ImageIO.read(file);
+        this.source = file;
+        BufferedImage image = ImageIO.read(file);
 
         if(image == null) throw new Exception("[Error]: File is not an image.");
     }
 
-    public void removeImage() {
-        this.image = null;
+    public void removeSource() {
+        this.source = null;
     }
 
     public void addFile(String path) throws Exception, FileNotFoundException {
@@ -52,4 +52,7 @@ public abstract class ImageStegnography {
         
         return allBytes;
     }
+
+    // Retorna o número de bytes máximo que o source pode armazenar
+    public abstract long getMaxSpaceAvailable();
 }

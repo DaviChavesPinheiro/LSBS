@@ -47,9 +47,18 @@ public class LSBStegnography extends ImageStegnography {
         return (num | ((bit & 0b1) << n));
     }
 
+    public int bytesToInt(byte[] bytes) {
+        int num = 0;
+        for (int i = 0; i < 4; i++) {
+            num = setByte(num, bytes[i], 3 - i);
+        }
+        return num;
+    }
+
     @Override
     public void encode() {
         try {
+            BufferedImage image = ImageIO.read(this.source);
             byte[] fileBytes = getBytesToEncode();
             byte[] bytes = this.concatWithArrays(new byte[4], fileBytes);
 
@@ -80,14 +89,7 @@ public class LSBStegnography extends ImageStegnography {
         }
     }
 
-    int bytesToInt(byte[] bytes) {
-        int num = 0;
-        for (int i = 0; i < 4; i++) {
-            num = setByte(num, bytes[i], 3 - i);
-        }
-
-        return num;
-    }
+    
 
     @Override
     public void decode(String path) {
@@ -134,6 +136,19 @@ public class LSBStegnography extends ImageStegnography {
             System.out.println("Exception occured :" + e.getMessage());
         }
         
+    }
+
+    @Override
+    public long getMaxSpaceAvailable() {
+        if(this.source == null) return 0;
+        try {
+            BufferedImage image = ImageIO.read(this.source);
+            long pixelsAmount = image.getWidth() * image.getHeight();
+            double bytesPerPixelProportion = 3d/8d;
+            return (long)(pixelsAmount * bytesPerPixelProportion);
+        } catch (Exception e) {
+            return -1;
+        }
     }
     
 }
