@@ -46,6 +46,14 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-       
+        try {
+            LSBStegnography stegnography = new LSBStegnography(args[0]);
+
+            stegnography.addFile(args[1]);
+            stegnography.encode();
+            stegnography.decode("out.png");
+        } catch (Exception e) {
+            System.out.println("Exception occured :" + e.getMessage());
+        }
     }
 }

@@ -1,21 +1,21 @@
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.image.BufferedImage;
 
 public abstract class ImageStegnography {
     BufferedImage image;
-    List<InputStream> files;
+    List<File> files = new ArrayList<File>();
 
-    public ImageStegnography(String path) throws IOException, Exception {
+    public ImageStegnography(String path) throws Exception {
         this.setImage(path);
     }
 
-    public void setImage(String path) throws IOException, Exception {
+    public void setImage(String path) throws Exception {
         File file = new File(path);
 
         image = ImageIO.read(file);
@@ -28,7 +28,7 @@ public abstract class ImageStegnography {
     }
 
     public void addFile(String path) throws Exception, FileNotFoundException {
-        files.add(new FileInputStream(path));
+        files.add(new File(path));
     }
 
     public void removeFile() {
@@ -37,5 +37,17 @@ public abstract class ImageStegnography {
 
     public abstract void encode();
 
-    public abstract void decode(String path); 
+    public abstract void decode(String path);
+
+    public byte[] getBytesToEncode() throws Exception, FileNotFoundException {
+        File file = files.get(0);
+
+        byte[] allBytes = new byte[(int)file.length()];
+
+        InputStream inputStream = new FileInputStream(file.getAbsolutePath());
+
+        inputStream.read(allBytes);
+        
+        return allBytes;
+    }
 }
