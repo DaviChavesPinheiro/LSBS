@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.*;
 
-// TargetFile representa um arquivo (zip) com possíveis multiplos sub arquivos
+// TargetFile represents a file (zip) with multiples sub files
 public class TargetFile {
     private File targetFile;
     private List<File> subFiles = new ArrayList<File>();
 
-    // Adiciona um arquivo a lista de subFiles
+    // Add a file to the subFiles list
     public File addSubFile(String path) throws Exception {
         File file = new File(path);
         if(subFiles.indexOf(file) != -1) throw new Exception("[Error]: Duplicate file");
@@ -21,13 +21,13 @@ public class TargetFile {
         return file;
     }
 
-    // Remove um arquivo da lista de subFiles
+    // Remove a file from subFiles list
     public void removeSubFile(File file) {
         subFiles.remove(file);
         zipSubFiles();
     }
 
-    // Retorna os subFiles zippados
+    // Return zipped subFiles
     private void zipSubFiles() {
         try {
             if(targetFile != null) targetFile.delete();
@@ -54,7 +54,7 @@ public class TargetFile {
         }
     }
 
-    // Retorna os bytes do targetFile
+    // Return targetFile bytes
     public byte[] getFileBytes() throws Exception {
         byte[] allBytes = new byte[(int)targetFile.length()];
         InputStream inputStream = new FileInputStream(targetFile.getAbsolutePath());
@@ -62,7 +62,7 @@ public class TargetFile {
         return allBytes;
     }
 
-    // Retorna o tamanho dos arquivos compactados
+    // Return compacted files size
     public long getTargetFileSize() {
         return targetFile == null ? 0 : targetFile.length();
     }

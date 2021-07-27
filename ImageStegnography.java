@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public abstract class ImageStegnography {
     protected File source;
 
-    // Seta a imagem fonte
+    // Set source image
     public void setSource(String path) throws Exception {
         File file = new File(path);
         this.source = file;
@@ -13,17 +13,17 @@ public abstract class ImageStegnography {
 
         if(image == null) throw new Exception("[Error]: File is not an image.");
     }
-    // Remove a imagem fonte
+    // Remove source image
     public void removeSource() {
         this.source = null;
     }
 
-    // Esteganografa os arquivos 
+    // Steganograph the files 
     public abstract void encode(TargetFile targetFile);
 
-    // Desesteganografa os arquivos
+    // Desteganograph the files
     public abstract void decode(String path);
 
-    // Retorna o número de bytes máximo que o source pode armazenar
+    // Returns the max number of bytes the source can store
     public abstract long getMaxSpaceAvailable();
 }
