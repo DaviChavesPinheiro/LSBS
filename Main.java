@@ -7,6 +7,7 @@ public class Main {
                 stegnography.addFile("doge.png");
                 stegnography.addFile("Main.java");
                 stegnography.addFile("LSBStegnography.java");
+                stegnography.zipFiles();
                 
                 System.out.println("SpaceAvailable: \t" + stegnography.getMaxSpaceAvailable());
                 System.out.println("CurrentSize: \t\t" + stegnography.getCurrentZipSize());

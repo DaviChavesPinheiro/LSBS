@@ -9,16 +9,10 @@ import java.util.zip.*;
 import java.awt.image.BufferedImage;
 
 public abstract class ImageStegnography {
-    File source;
-    File zipFile;
-    List<File> files = new ArrayList<File>();
+    protected File source, zipFile;
+    private List<File> files = new ArrayList<File>();
 
-    public ImageStegnography() {}
-
-    public ImageStegnography(String path) throws Exception {
-        this.setSource(path);
-    }
-
+    // Seta a imagem fonte
     public void setSource(String path) throws Exception {
         File file = new File(path);
         this.source = file;
@@ -26,27 +20,31 @@ public abstract class ImageStegnography {
 
         if(image == null) throw new Exception("[Error]: File is not an image.");
     }
-
+    // Remove a imagem fonte
     public void removeSource() {
         this.source = null;
     }
 
+    // Adiciona um arquivo a lista de arquivos que serão inseridos dentro da imagem fonte
     public File addFile(String path) throws Exception {
         File file = new File(path);
         if(files.indexOf(file) != -1) throw new Exception("[Error]: Duplicate file");
         files.add(file);
-        zipFiles();
         return file;
     }
 
+    // Remove um arquivo da lista de arquivos
     public void removeFile(File file) {
         files.remove(file);
         zipFiles();
     }
 
+    // Zippa todos os arquivos da lista de arquivos
     public void zipFiles() {
         try {
-            zipFile = new File("tmp.zip");
+            zipFile = File.createTempFile("LSBS-", "-files");
+            zipFile.deleteOnExit();
+
             ZipOutputStream stream = new ZipOutputStream(new FileOutputStream(zipFile));
 
             for (File file : files) {

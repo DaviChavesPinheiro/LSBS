@@ -9,10 +9,10 @@ public class LSBStegnography extends ImageStegnography {
     public LSBStegnography() {}
 
     public LSBStegnography(String path) throws Exception {
-        super(path);
+        this.setSource(path);
     }
 
-    public byte[] concatWithArrays(byte[] array1, byte[] array2) {
+    public byte[] concatArrays(byte[] array1, byte[] array2) {
         byte[] bytes = new byte[array1.length + array2.length];
         for (int i = 0; i < array1.length; i++) {
             bytes[i] = array1[i];
@@ -68,7 +68,7 @@ public class LSBStegnography extends ImageStegnography {
         try {
             BufferedImage image = ImageIO.read(this.source);
             byte[] fileBytes = getFileBytes();
-            byte[] bytes = this.concatWithArrays(new byte[4], fileBytes);
+            byte[] bytes = this.concatArrays(new byte[4], fileBytes);
 
 
             int bytesToEncodeSize = fileBytes.length;
