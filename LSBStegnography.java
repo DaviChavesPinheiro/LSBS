@@ -59,7 +59,7 @@ public class LSBStegnography extends ImageStegnography {
     public File addFile(String path) throws Exception {
         File file = new File(path);
 
-        if(getCurrentFilesSize() + file.length() > getMaxSpaceAvailable()) throw new Exception("[Error]: Cabou o espaco brother");
+        if(getCurrentZipSize() + file.length() > getMaxSpaceAvailable()) throw new Exception("[Error]: Cabou o espaco brother");
         return super.addFile(path);
     }
 
@@ -132,7 +132,7 @@ public class LSBStegnography extends ImageStegnography {
                 bytes[bytn - 4] = (byte)setBit(bytes[bytn - 4], getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
-            File hiddenFile = new File("secret.png");
+            File hiddenFile = new File("secret.zip");
 
             OutputStream stream = new FileOutputStream(hiddenFile);
             stream.write(bytes);
