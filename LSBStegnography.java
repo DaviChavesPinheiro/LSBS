@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.awt.image.BufferedImage;
-
 public class LSBStegnography extends ImageStegnography {
 
     public LSBStegnography() {}
@@ -12,70 +11,17 @@ public class LSBStegnography extends ImageStegnography {
         this.setSource(path);
     }
 
-    public byte[] concatArrays(byte[] array1, byte[] array2) {
-        byte[] bytes = new byte[array1.length + array2.length];
-        for (int i = 0; i < array1.length; i++) {
-            bytes[i] = array1[i];
-        }
-
-        for (int i = array1.length; i < array1.length + array2.length; i++) {
-            bytes[i] = array2[i - array1.length];
-        }
-
-        return bytes;
-    }
-
-    public byte getByte(int num, int bn) {
-        return (byte)((num & (0xFF << (bn * 8))) >> (bn * 8));
-    }
-
-    public int setByte(int num, byte byt, int n) {
-        num = num & (~(0xFF << (n * 8)));
-        return (num | (((int)byt & 0xFF) << (n * 8)));
-    }
-
-    public int getHalfByte(int num, int bn) {
-        return ((num & (0xF << (bn * 4))) >> (bn * 4)) & 0xF;
-    }
-
-    public int getBit(int num, int n) {
-        return ((num & (0b1 << n)) >> n) & 0b1;
-    }
-
-    public int setBit(int num, int bit, int n) {
-        num = num & (~(0b1 << n));
-        return (num | ((bit & 0b1) << n));
-    }
-
-    public int bytesToInt(byte[] bytes) {
-        int num = 0;
-        for (int i = 0; i < 4; i++) {
-            num = setByte(num, bytes[i], 3 - i);
-        }
-        return num;
-    }
-
     @Override
-    public File addFile(String path) throws Exception {
-        File file = new File(path);
-
-        if(getCurrentZipSize() + file.length() > getMaxSpaceAvailable()) throw new Exception("[Error]: Cabou o espaco brother");
-        return super.addFile(path);
-    }
-
-    @Override
-    public void encode() {
+    public void encode(TargetFile targetFile) {
         try {
             BufferedImage image = ImageIO.read(this.source);
-            byte[] fileBytes = getFileBytes();
-            byte[] bytes = this.concatArrays(new byte[4], fileBytes);
+            byte[] targetFileBytes = targetFile.getFileBytes();
+            byte[] bytes = Utils.concatArrays(new byte[4], targetFileBytes);
 
-
-            int bytesToEncodeSize = fileBytes.length;
-            bytes[0] = getByte(bytesToEncodeSize, 3);
-            bytes[1] = getByte(bytesToEncodeSize, 2);
-            bytes[2] = getByte(bytesToEncodeSize, 1);
-            bytes[3] = getByte(bytesToEncodeSize, 0);
+            bytes[0] = Utils.getByte(targetFileBytes.length, 3);
+            bytes[1] = Utils.getByte(targetFileBytes.length, 2);
+            bytes[2] = Utils.getByte(targetFileBytes.length, 1);
+            bytes[3] = Utils.getByte(targetFileBytes.length, 0);
 
             for (int bn = 0; bn < bytes.length * 8; bn++) {
                 int pn = Math.floorDiv(bn, 3);
@@ -84,9 +30,9 @@ public class LSBStegnography extends ImageStegnography {
                 int color = image.getRGB(imageX, imageY);
 
                 int byt = bytes[bn >> 3];
-                int bit = getBit(byt, 7 - (bn % 8));
+                int bit = Utils.getBit(byt, 7 - (bn % 8));
 
-                color = setBit(color, bit, (2 - (bn % 3)) * 8);
+                color = Utils.setBit(color, bit, (2 - (bn % 3)) * 8);
 
                 image.setRGB(imageX, imageY, color);
             }
@@ -114,10 +60,10 @@ public class LSBStegnography extends ImageStegnography {
 
                 int bytn = bn >> 3;
 
-                bytes[bytn] = (byte)setBit(bytes[bytn], getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
+                bytes[bytn] = (byte)Utils.setBit(bytes[bytn], Utils.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
-            int hideFileSize = bytesToInt(bytes);
+            int hideFileSize = Utils.bytesToInt(bytes);
 
             bytes = new byte[hideFileSize];
 
@@ -129,7 +75,7 @@ public class LSBStegnography extends ImageStegnography {
 
                 int bytn = bn >> 3;
 
-                bytes[bytn - 4] = (byte)setBit(bytes[bytn - 4], getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
+                bytes[bytn - 4] = (byte)Utils.setBit(bytes[bytn - 4], Utils.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
             File hiddenFile = new File("secret.zip");
@@ -144,17 +90,16 @@ public class LSBStegnography extends ImageStegnography {
         
     }
 
+    // Calcula o espaco máximo disponível
     @Override
     public long getMaxSpaceAvailable() {
-        if(this.source == null) return 0;
         try {
             BufferedImage image = ImageIO.read(this.source);
             long pixelsAmount = image.getWidth() * image.getHeight();
             double bytesPerPixelProportion = 3d/8d;
             return (long)(pixelsAmount * bytesPerPixelProportion);
         } catch (Exception e) {
-            return -1;
+            return 0;
         }
     }
-    
 }

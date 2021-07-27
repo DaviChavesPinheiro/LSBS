@@ -3,15 +3,16 @@ public class Main {
         try {
             LSBStegnography stegnography = new LSBStegnography();
             if(args[0].equals("encode")) {
+                TargetFile targetFile = new TargetFile();
+                targetFile.addSubFile("doge.png");
+                targetFile.addSubFile("Main.java");
+                targetFile.addSubFile("LSBStegnography.java");
+
                 stegnography.setSource(args[1]);
-                stegnography.addFile("doge.png");
-                stegnography.addFile("Main.java");
-                stegnography.addFile("LSBStegnography.java");
-                stegnography.zipFiles();
                 
                 System.out.println("SpaceAvailable: \t" + stegnography.getMaxSpaceAvailable());
-                System.out.println("CurrentSize: \t\t" + stegnography.getCurrentZipSize());
-                stegnography.encode();
+                System.out.println("TargetFileSize: \t" + targetFile.getTargetFileSize());
+                stegnography.encode(targetFile);
             } else if(args[0].equals("decode")) {
                 stegnography.decode(args[1]);
             }
