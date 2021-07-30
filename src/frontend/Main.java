@@ -2,6 +2,10 @@ package src.frontend;
 
 import java.nio.file.Path;
 import javax.swing.*;
+
+import src.frontend.components.Content;
+import src.frontend.components.SideBar;
+
 import java.awt.*;
 
 public class Main {
@@ -11,16 +15,18 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Change the icon image
-        Path cwd = Path.of("src/images/icon.png").toAbsolutePath();
-        ImageIcon img = new ImageIcon(cwd.toString());
+        Path imgAbsPath = Path.of("src/images/icon.png").toAbsolutePath();
+        ImageIcon img = new ImageIcon(imgAbsPath.toString());
         frame.setIconImage(img.getImage());
 
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setOpaque(true);
-        menuBar.setBackground(new Color(29, 29, 29));
-        menuBar.setBorderPainted(false);
-        menuBar.setPreferredSize(new Dimension(1080, 20));
-        frame.setJMenuBar(menuBar);
+        // Create Main Panel
+        JPanel mPanel = new JPanel();
+        mPanel.setLayout(new BorderLayout());
+        mPanel.add(new SideBar(), BorderLayout.LINE_START);
+        mPanel.add(new Content(), BorderLayout.CENTER);
+        
+        // Add Panel
+        frame.setContentPane(mPanel);
 
         //Display the window.
         frame.pack();
