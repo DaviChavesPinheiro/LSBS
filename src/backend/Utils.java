@@ -1,3 +1,4 @@
+package src.backend;
 public class Utils {
     public static byte[] concatArrays(byte[] array1, byte[] array2) {
         byte[] bytes = new byte[array1.length + array2.length];
