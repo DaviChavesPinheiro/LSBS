@@ -1,5 +1,7 @@
 package src.frontend.components;
-
-public class Donut {
-    
+import javax.swing.*;
+public class Donut extends JLabel {
+    public Donut() {
+        this.setText("0KB\navailable");
+    }
 }
