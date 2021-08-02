@@ -6,12 +6,15 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.awt.image.BufferedImage;
 public class LSBStegnography_M extends ImageStegnography_M {
+    private static LSBStegnography_M instance = null;
+    public static LSBStegnography_M getInstance() {
+        if(instance == null) {
+            instance = new LSBStegnography_M();
+        }
+        return instance;
+    }
 
     public LSBStegnography_M() {}
-
-    public LSBStegnography_M(String path) throws Exception {
-        this.setSource(path);
-    }
 
     @Override
     public void encode(TargetFile_M targetFile) {
