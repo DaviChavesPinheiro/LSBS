@@ -3,6 +3,7 @@ package src.controller;
 import javax.swing.filechooser.FileSystemView;
 
 import src.model.LSBStegnography_M;
+import src.model.TargetFile_M;
 import src.view.Donut_V;
 import src.view.SourceContent_V;
 
@@ -30,6 +31,7 @@ public class SourceContent_C implements MouseListener {
             try {
                 LSBStegnography_M lsbStegnography = LSBStegnography_M.getInstance();
                 lsbStegnography.setSource(selectedFile);
+                if(!TargetFile_M.getInstance().isEmpty()) lsbStegnography.encode(TargetFile_M.getInstance());
                 Donut_V.getInstance().setMaxSpace(lsbStegnography.getMaxSpaceAvailable());
                 SourceContent_V.getInstance().refresh();
             } catch (Exception err) {

@@ -35,10 +35,10 @@ public class SourceContent_V extends JPanel {
     }
 
     public void refresh() {
-        File source = LSBStegnography_M.getInstance().getSource();
-        if(source != null) {
+        File out = LSBStegnography_M.getInstance().getOut();
+        if(out != null) {
             this.removeAll();
-            ImageIcon img = new ImageIcon((new ImageIcon(source.getAbsolutePath())).getImage().getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT));
+            ImageIcon img = new ImageIcon((new ImageIcon(out.getAbsolutePath())).getImage().getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT));
             this.add(new JLabel(img), BorderLayout.CENTER);
         } else {
             this.removeAll();

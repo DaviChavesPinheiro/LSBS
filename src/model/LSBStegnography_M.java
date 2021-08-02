@@ -42,7 +42,12 @@ public class LSBStegnography_M extends ImageStegnography_M {
                 image.setRGB(imageX, imageY, color);
             }
 
-            ImageIO.write(image, "png", new File("./out.png"));
+            if(out != null) out.delete();
+
+            out = File.createTempFile("LSBS-", "-out.png");
+            out.deleteOnExit();
+
+            ImageIO.write(image, "png", out);
         } catch (Exception e) {
             System.out.println("Exception occured:" + e.getMessage());
         }

@@ -5,7 +5,7 @@ import java.io.File;
 import java.awt.image.BufferedImage;
 
 public abstract class ImageStegnography_M {
-    protected File source;
+    protected File source, out;
 
     // Seta a imagem fonte
     public void setSource(String path) throws Exception {
@@ -19,10 +19,15 @@ public abstract class ImageStegnography_M {
         BufferedImage image = ImageIO.read(file);
         if(image == null) throw new Exception("[Error]: File is not an image.");
         this.source = file;
+        this.out = file;
     }
 
     public File getSource() {
         return source;
+    }
+
+    public File getOut() {
+        return out;
     }
 
     // Remove a imagem fonte

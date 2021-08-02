@@ -40,7 +40,7 @@ public class AddFile_V extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        AddFile_C controller = new AddFile_C(this);
+        AddFile_C controller = new AddFile_C();
         this.addActionListener(controller);
     }
 
