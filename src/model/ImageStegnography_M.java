@@ -10,11 +10,17 @@ public abstract class ImageStegnography_M {
     // Seta a imagem fonte
     public void setSource(String path) throws Exception {
         File file = new File(path);
-        this.source = file;
         BufferedImage image = ImageIO.read(file);
-
         if(image == null) throw new Exception("[Error]: File is not an image.");
+        this.source = file;
     }
+    // Seta a imagem fonte
+    public void setSource(File file) throws Exception {
+        BufferedImage image = ImageIO.read(file);
+        if(image == null) throw new Exception("[Error]: File is not an image.");
+        this.source = file;
+    }
+
     // Remove a imagem fonte
     public void removeSource() {
         this.source = null;
