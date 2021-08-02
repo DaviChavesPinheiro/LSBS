@@ -1,37 +1,10 @@
 package src;
 
-import java.nio.file.Path;
-import javax.swing.*;
-
-import src.view.Content_V;
-import src.view.SideBar_V;
-
-import java.awt.*;
+import src.view.App;
 
 public class Main {
     private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("LSBS");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Change the icon image
-        Path imgAbsPath = Path.of("src/images/icon.png").toAbsolutePath();
-        ImageIcon img = new ImageIcon(imgAbsPath.toString());
-        frame.setIconImage(img.getImage());
-
-        // Create Main Panel
-        JPanel mPanel = new JPanel();
-        mPanel.setLayout(new BorderLayout());
-        mPanel.add(new SideBar_V(), BorderLayout.LINE_START);
-        mPanel.add(new Content_V(), BorderLayout.CENTER);
-        
-        // Add Panel
-        frame.setContentPane(mPanel);
-
-        //Display the window.
-        frame.pack();
-        frame.setLocationRelativeTo(null); // Center
-        frame.setVisible(true);
+        App.getInstance();
     }
 
     public static void main(String[] args) {

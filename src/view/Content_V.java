@@ -15,5 +15,11 @@ public class Content_V extends JPanel {
 
         // SourceArea
         this.add(new SourceArea_V());
+
+        // Margin
+        this.add(Box.createRigidArea(new Dimension(0, 35)));
+
+        // Files Area
+        this.add(new FilesArea_V());
     }
 }
