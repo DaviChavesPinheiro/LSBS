@@ -1,10 +1,10 @@
 package src;
 
-import src.view.App;
+import src.view.App_V;
 
 public class Main {
     private static void createAndShowGUI() {
-        App.getInstance();
+        App_V.getInstance();
     }
 
     public static void main(String[] args) {

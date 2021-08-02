@@ -6,16 +6,16 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class App extends JFrame {
-    private static App instance = null;
-    public static App getInstance() {
+public class App_V extends JFrame {
+    private static App_V instance = null;
+    public static App_V getInstance() {
         if(instance == null) {
-            instance = new App();
+            instance = new App_V();
         }
         return instance;
     }
     
-    public App() {
+    public App_V() {
         super("LSBS");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

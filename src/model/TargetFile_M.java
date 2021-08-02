@@ -10,12 +10,29 @@ import java.util.zip.*;
 
 // TargetFile representa um arquivo (zip) com possíveis multiplos sub arquivos
 public class TargetFile_M {
+    private static TargetFile_M instance = null;
+    public static TargetFile_M getInstance() {
+        if(instance == null) {
+            instance = new TargetFile_M();
+        }
+        return instance;
+    }
+
     private File targetFile;
     private List<File> subFiles = new ArrayList<File>();
 
     // Adiciona um arquivo a lista de subFiles
     public File addSubFile(String path) throws Exception {
         File file = new File(path);
+        if(subFiles.indexOf(file) != -1) throw new Exception("[Error]: Duplicate file");
+        subFiles.add(file);
+
+        zipSubFiles();
+        return file;
+    }
+    
+    // Adiciona um arquivo a lista de subFiles
+    public File addSubFile(File file) throws Exception {
         if(subFiles.indexOf(file) != -1) throw new Exception("[Error]: Duplicate file");
         subFiles.add(file);
 
