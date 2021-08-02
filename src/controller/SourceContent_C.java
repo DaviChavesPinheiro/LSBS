@@ -3,6 +3,7 @@ package src.controller;
 import javax.swing.filechooser.FileSystemView;
 
 import src.model.LSBStegnography_M;
+import src.view.Donut_V;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -19,13 +20,16 @@ public class SourceContent_C implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent event) {
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                LSBStegnography_M.getInstance().setSource(selectedFile);
+                LSBStegnography_M lsbStegnography = LSBStegnography_M.getInstance();
+                lsbStegnography.setSource(selectedFile);
+                Donut_V.getInstance().setMaxSpace(lsbStegnography.getMaxSpaceAvailable());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }

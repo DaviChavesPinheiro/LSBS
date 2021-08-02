@@ -9,6 +9,6 @@ public class SideBar_V extends JPanel  {
         this.setBackground(new Color(29, 29, 29));
         this.setPreferredSize(new Dimension(1080 / 4 * 1, 720));
 
-        this.add(new Donut_V());
+        this.add(Donut_V.getInstance());
     }
 }
