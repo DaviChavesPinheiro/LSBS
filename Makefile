@@ -2,13 +2,13 @@ FLAGS_C = -d bin/
 FLAGS_R = -classpath bin/
 
 all:
-	javac $(FLAGS_C) src/frontend/Main.java 
-	java $(FLAGS_R) src/frontend/Main
+	javac $(FLAGS_C) src/Main.java 
+	java $(FLAGS_R) src/Main
 c:
-	javac $(FLAGS_C) src/frontend/Main.java 
+	javac $(FLAGS_C) src/Main.java 
 
 r:
-	java $(FLAGS_R) src/frontend/Main
+	java $(FLAGS_R) src/Main
 
 clean:
 	rm **/*.class

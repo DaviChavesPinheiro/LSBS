@@ -1,9 +1,9 @@
-package src.frontend.components;
+package src.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class SourceHeader extends JPanel {
-    public SourceHeader() {
+public class SourceHeader_V extends JPanel {
+    public SourceHeader_V() {
         this.setOpaque(true);
         this.setBackground(new Color(56, 56, 56));
         this.setMaximumSize(new Dimension(640, 15));

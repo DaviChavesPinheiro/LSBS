@@ -1,10 +1,10 @@
-package src.backend;
+package src.model;
 import javax.imageio.ImageIO;
 
 import java.io.File;
 import java.awt.image.BufferedImage;
 
-public abstract class ImageStegnography {
+public abstract class ImageStegnography_M {
     protected File source;
 
     // Seta a imagem fonte
@@ -21,7 +21,7 @@ public abstract class ImageStegnography {
     }
 
     // Esteganografa os arquivos 
-    public abstract void encode(TargetFile targetFile);
+    public abstract void encode(TargetFile_M targetFile);
 
     // Desesteganografa os arquivos
     public abstract void decode(String path);

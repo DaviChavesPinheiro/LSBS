@@ -1,10 +1,10 @@
-package src.frontend;
+package src;
 
 import java.nio.file.Path;
 import javax.swing.*;
 
-import src.frontend.components.Content;
-import src.frontend.components.SideBar;
+import src.view.Content_V;
+import src.view.SideBar_V;
 
 import java.awt.*;
 
@@ -22,8 +22,8 @@ public class Main {
         // Create Main Panel
         JPanel mPanel = new JPanel();
         mPanel.setLayout(new BorderLayout());
-        mPanel.add(new SideBar(), BorderLayout.LINE_START);
-        mPanel.add(new Content(), BorderLayout.CENTER);
+        mPanel.add(new SideBar_V(), BorderLayout.LINE_START);
+        mPanel.add(new Content_V(), BorderLayout.CENTER);
         
         // Add Panel
         frame.setContentPane(mPanel);

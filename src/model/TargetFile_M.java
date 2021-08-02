@@ -1,4 +1,5 @@
-package src.backend;
+package src.model;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.zip.*;
 
 // TargetFile representa um arquivo (zip) com possíveis multiplos sub arquivos
-public class TargetFile {
+public class TargetFile_M {
     private File targetFile;
     private List<File> subFiles = new ArrayList<File>();
 

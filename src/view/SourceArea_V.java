@@ -1,9 +1,9 @@
-package src.frontend.components;
+package src.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class SourceArea extends JPanel {
-    public SourceArea() {
+public class SourceArea_V extends JPanel {
+    public SourceArea_V() {
         this.setOpaque(true);
         this.setBackground(new Color(29, 29, 29));
         this.setBorder(BorderFactory.createLineBorder(new Color(56, 56, 56), 2));
@@ -12,9 +12,9 @@ public class SourceArea extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // SourceHeader
-        this.add(new SourceHeader());
+        this.add(new SourceHeader_V());
 
         // SourceContent
-        this.add(new SourceContent());
+        this.add(new SourceContent_V());
     }
 }

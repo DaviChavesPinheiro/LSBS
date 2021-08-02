@@ -7,3 +7,5 @@ out.png
 secret.png
 
 *.zip
+
+bin/

@@ -1,29 +1,29 @@
-package src.backend;
+package src.model;
 import javax.imageio.ImageIO;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.awt.image.BufferedImage;
-public class LSBStegnography extends ImageStegnography {
+public class LSBStegnography_M extends ImageStegnography_M {
 
-    public LSBStegnography() {}
+    public LSBStegnography_M() {}
 
-    public LSBStegnography(String path) throws Exception {
+    public LSBStegnography_M(String path) throws Exception {
         this.setSource(path);
     }
 
     @Override
-    public void encode(TargetFile targetFile) {
+    public void encode(TargetFile_M targetFile) {
         try {
             BufferedImage image = ImageIO.read(this.source);
             byte[] targetFileBytes = targetFile.getFileBytes();
-            byte[] bytes = Utils.concatArrays(new byte[4], targetFileBytes);
+            byte[] bytes = Utils_M.concatArrays(new byte[4], targetFileBytes);
 
-            bytes[0] = Utils.getByte(targetFileBytes.length, 3);
-            bytes[1] = Utils.getByte(targetFileBytes.length, 2);
-            bytes[2] = Utils.getByte(targetFileBytes.length, 1);
-            bytes[3] = Utils.getByte(targetFileBytes.length, 0);
+            bytes[0] = Utils_M.getByte(targetFileBytes.length, 3);
+            bytes[1] = Utils_M.getByte(targetFileBytes.length, 2);
+            bytes[2] = Utils_M.getByte(targetFileBytes.length, 1);
+            bytes[3] = Utils_M.getByte(targetFileBytes.length, 0);
 
             for (int bn = 0; bn < bytes.length * 8; bn++) {
                 int pn = Math.floorDiv(bn, 3);
@@ -32,9 +32,9 @@ public class LSBStegnography extends ImageStegnography {
                 int color = image.getRGB(imageX, imageY);
 
                 int byt = bytes[bn >> 3];
-                int bit = Utils.getBit(byt, 7 - (bn % 8));
+                int bit = Utils_M.getBit(byt, 7 - (bn % 8));
 
-                color = Utils.setBit(color, bit, (2 - (bn % 3)) * 8);
+                color = Utils_M.setBit(color, bit, (2 - (bn % 3)) * 8);
 
                 image.setRGB(imageX, imageY, color);
             }
@@ -62,10 +62,10 @@ public class LSBStegnography extends ImageStegnography {
 
                 int bytn = bn >> 3;
 
-                bytes[bytn] = (byte)Utils.setBit(bytes[bytn], Utils.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
+                bytes[bytn] = (byte)Utils_M.setBit(bytes[bytn], Utils_M.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
-            int hideFileSize = Utils.bytesToInt(bytes);
+            int hideFileSize = Utils_M.bytesToInt(bytes);
 
             bytes = new byte[hideFileSize];
 
@@ -77,7 +77,7 @@ public class LSBStegnography extends ImageStegnography {
 
                 int bytn = bn >> 3;
 
-                bytes[bytn - 4] = (byte)Utils.setBit(bytes[bytn - 4], Utils.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
+                bytes[bytn - 4] = (byte)Utils_M.setBit(bytes[bytn - 4], Utils_M.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
             File hiddenFile = new File("secret.zip");

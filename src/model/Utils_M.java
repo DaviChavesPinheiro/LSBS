@@ -1,5 +1,5 @@
-package src.backend;
-public class Utils {
+package src.model;
+public class Utils_M {
     public static byte[] concatArrays(byte[] array1, byte[] array2) {
         byte[] bytes = new byte[array1.length + array2.length];
         for (int i = 0; i < array1.length; i++) {

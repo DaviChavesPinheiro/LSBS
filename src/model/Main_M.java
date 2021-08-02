@@ -1,10 +1,11 @@
-package src.backend;
-public class Main {
+package src.model;
+
+public class Main_M {
     public static void main(String[] args) {
         try {
-            LSBStegnography stegnography = new LSBStegnography();
+            LSBStegnography_M stegnography = new LSBStegnography_M();
             if(args[0].equals("encode")) {
-                TargetFile targetFile = new TargetFile();
+                TargetFile_M targetFile = new TargetFile_M();
                 targetFile.addSubFile("doge.png");
                 targetFile.addSubFile("Main.java");
                 targetFile.addSubFile("LSBStegnography.java");
