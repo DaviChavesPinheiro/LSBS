@@ -1,6 +1,9 @@
 package src.controller;
 
 import javax.swing.filechooser.FileSystemView;
+
+import src.model.LSBStegnography_M;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
@@ -14,14 +17,18 @@ public class SourceContent_C implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent event) {
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            System.out.println(selectedFile.getAbsolutePath());
+            try {
+                LSBStegnography_M.getInstance().setSource(selectedFile);
+            } catch (Exception err) {
+                System.out.println(err.getMessage());
+            }
         }
     }
 
