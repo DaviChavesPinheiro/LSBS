@@ -21,6 +21,10 @@ public abstract class ImageStegnography_M {
         this.source = file;
     }
 
+    public File getSource() {
+        return source;
+    }
+
     // Remove a imagem fonte
     public void removeSource() {
         this.source = null;

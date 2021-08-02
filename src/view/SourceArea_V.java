@@ -15,6 +15,6 @@ public class SourceArea_V extends JPanel {
         this.add(new SourceHeader_V());
 
         // SourceContent
-        this.add(new SourceContent_V());
+        this.add(SourceContent_V.getInstance());
     }
 }
