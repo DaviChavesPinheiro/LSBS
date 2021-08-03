@@ -42,23 +42,21 @@ public class LSBStegnography_M extends ImageStegnography_M {
                 image.setRGB(imageX, imageY, color);
             }
 
-            if(out != null) out.delete();
+            if(endodedFile != null) endodedFile.delete();
 
-            out = File.createTempFile("LSBS-", "-out.png");
-            out.deleteOnExit();
+            endodedFile = File.createTempFile("LSBS-", "-endodedFile.png");
+            endodedFile.deleteOnExit();
 
-            ImageIO.write(image, "png", out);
+            ImageIO.write(image, "png", endodedFile);
         } catch (Exception e) {
             System.out.println("Exception occured:" + e.getMessage());
         }
     }
 
     @Override
-    public void decode(String path) {
+    public void decode() {
         try {
-            File file = new File(path);
-
-            BufferedImage lsbImage = ImageIO.read(file);
+            BufferedImage lsbImage = ImageIO.read(endodedFile);
 
             byte bytes[] = new byte[4];
 
@@ -88,9 +86,12 @@ public class LSBStegnography_M extends ImageStegnography_M {
                 bytes[bytn - 4] = (byte)Utils_M.setBit(bytes[bytn - 4], Utils_M.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
-            File hiddenFile = new File("secret.zip");
+            if(decodedFile != null) decodedFile.delete();
 
-            OutputStream stream = new FileOutputStream(hiddenFile);
+            decodedFile = File.createTempFile("LSBS-", "-decodedFile");
+            decodedFile.deleteOnExit();
+
+            OutputStream stream = new FileOutputStream(decodedFile);
             stream.write(bytes);
             stream.close();
 

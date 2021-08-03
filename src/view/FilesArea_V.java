@@ -18,7 +18,9 @@ public class FilesArea_V extends JPanel {
 
         this.setLayout(new FlowLayout());
         this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        this.add(new Extract_V());
         this.add(new AddFile_V());
+        this.add(new SaveAll_V());
     }
 
     public void addFile(File file) {

@@ -16,7 +16,7 @@ public class Main_M {
                 System.out.println("TargetFileSize: \t" + targetFile.getTargetFileSize());
                 stegnography.encode(targetFile);
             } else if(args[0].equals("decode")) {
-                stegnography.decode(args[1]);
+                stegnography.decode();
             }
         } catch (Exception e) {
             System.out.println("Exception occured:" + e.getMessage());
