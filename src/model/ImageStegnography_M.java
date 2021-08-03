@@ -12,14 +12,14 @@ import java.awt.image.BufferedImage;
 public abstract class ImageStegnography_M {
     protected File source, endodedFile, decodedFile;
 
-    // Seta a imagem fonte
+    // Set source image
     public void setSource(String path) throws Exception {
         File file = new File(path);
         BufferedImage image = ImageIO.read(file);
         if(image == null) throw new Exception("[Error]: File is not an image.");
         this.source = file;
     }
-    // Seta a imagem fonte
+    // Set source image
     public void setSource(File file) throws Exception {
         BufferedImage image = ImageIO.read(file);
         if(image == null) throw new Exception("[Error]: File is not an image.");
@@ -75,17 +75,17 @@ public abstract class ImageStegnography_M {
         return filesList.toArray(filesArray);
     }
 
-    // Remove a imagem fonte
+    // Remove source image
     public void removeSource() {
         this.source = null;
     }
 
-    // Esteganografa os arquivos 
+    // Steganograph the files 
     public abstract void encode(TargetFile_M targetFile);
 
-    // Desesteganografa os arquivos
+    // Desteganograph the files
     public abstract void decode();
 
-    // Retorna o número de bytes máximo que o source pode armazenar
+    // Returns the max number of bytes the source can store
     public abstract long getMaxSpaceAvailable();
 }

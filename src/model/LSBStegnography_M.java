@@ -101,7 +101,7 @@ public class LSBStegnography_M extends ImageStegnography_M {
         
     }
 
-    // Calcula o espaco máximo disponível
+    // Compute the max available storage
     @Override
     public long getMaxSpaceAvailable() {
         try {
