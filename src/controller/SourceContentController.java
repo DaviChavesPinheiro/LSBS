@@ -2,19 +2,19 @@ package src.controller;
 
 import javax.swing.filechooser.FileSystemView;
 
-import src.model.LSBStegnography_M;
-import src.model.TargetFile_M;
-import src.view.Donut_V;
-import src.view.SourceContent_V;
+import src.model.LSBStegnographyModel;
+import src.model.TargetFileModel;
+import src.view.DonutView;
+import src.view.SourceContentView;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.awt.*;
-public class SourceContent_C implements MouseListener {
+public class SourceContentController implements MouseListener {
     private JPanel view;
 
-    public SourceContent_C(JPanel view) {
+    public SourceContentController(JPanel view) {
         super();
         this.view = view;
     }
@@ -29,11 +29,11 @@ public class SourceContent_C implements MouseListener {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                LSBStegnography_M lsbStegnography = LSBStegnography_M.getInstance();
+                LSBStegnographyModel lsbStegnography = LSBStegnographyModel.getInstance();
                 lsbStegnography.setSource(selectedFile);
-                if(!TargetFile_M.getInstance().isEmpty()) lsbStegnography.encode(TargetFile_M.getInstance());
-                Donut_V.getInstance().setMaxSpace(lsbStegnography.getMaxSpaceAvailable());
-                SourceContent_V.getInstance().refresh();
+                if(!TargetFileModel.getInstance().isEmpty()) lsbStegnography.encode(TargetFileModel.getInstance());
+                DonutView.getInstance().setMaxSpace(lsbStegnography.getMaxSpaceAvailable());
+                SourceContentView.getInstance().refresh();
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }

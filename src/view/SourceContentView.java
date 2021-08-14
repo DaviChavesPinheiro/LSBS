@@ -1,25 +1,25 @@
 package src.view;
 import javax.swing.*;
 
-import src.controller.SourceContent_C;
-import src.model.LSBStegnography_M;
+import src.controller.SourceContentController;
+import src.model.LSBStegnographyModel;
 
 import java.awt.*;
 import java.io.File;
 import java.nio.file.Path;
 
-public class SourceContent_V extends JPanel {
-    private static SourceContent_V instance = null;
-    public static SourceContent_V getInstance() {
+public class SourceContentView extends JPanel {
+    private static SourceContentView instance = null;
+    public static SourceContentView getInstance() {
         if(instance == null) {
-            instance = new SourceContent_V();
+            instance = new SourceContentView();
         }
         return instance;
     }
 
     private JLabel pngImage;
 
-    public SourceContent_V() {
+    public SourceContentView() {
         this.setOpaque(true);
         this.setBackground(new Color(29, 29, 29));
         this.setLayout(new BorderLayout());
@@ -30,12 +30,12 @@ public class SourceContent_V extends JPanel {
 
         this.refresh();
 
-        SourceContent_C controller = new SourceContent_C(this);
+        SourceContentController controller = new SourceContentController(this);
         this.addMouseListener(controller);
     }
 
     public void refresh() {
-        File encodedFile = LSBStegnography_M.getInstance().getEncoded();
+        File encodedFile = LSBStegnographyModel.getInstance().getEncoded();
         if(encodedFile != null) {
             this.removeAll();
             ImageIcon img = new ImageIcon((new ImageIcon(encodedFile.getAbsolutePath())).getImage().getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT));

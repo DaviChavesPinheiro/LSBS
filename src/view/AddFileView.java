@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import src.controller.AddFile_C;
+import src.controller.AddFileController;
 
 import java.awt.*;
 
-public class AddFile_V extends JButton {
-    public AddFile_V() {
+public class AddFileView extends JButton {
+    public AddFileView() {
         super();
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(80, 80));
@@ -40,7 +40,7 @@ public class AddFile_V extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        AddFile_C controller = new AddFile_C();
+        AddFileController controller = new AddFileController();
         this.addActionListener(controller);
     }
 

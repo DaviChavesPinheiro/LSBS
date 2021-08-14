@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.zip.*;
 
 // TargetFile represents a file (zip) with multiples sub files
-public class TargetFile_M {
-    private static TargetFile_M instance = null;
-    public static TargetFile_M getInstance() {
+public class TargetFileModel {
+    private static TargetFileModel instance = null;
+    public static TargetFileModel getInstance() {
         if(instance == null) {
-            instance = new TargetFile_M();
+            instance = new TargetFileModel();
         }
         return instance;
     }

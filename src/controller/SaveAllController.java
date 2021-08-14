@@ -1,6 +1,6 @@
 package src.controller;
 
-import src.model.LSBStegnography_M;
+import src.model.LSBStegnographyModel;
 
 import java.awt.event.*;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
-public class SaveAll_C implements ActionListener {
+public class SaveAllController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -20,7 +20,7 @@ public class SaveAll_C implements ActionListener {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.println(selectedFile.getAbsolutePath());
             try {
-                Files.copy(LSBStegnography_M.getInstance().getDecoded().toPath(), selectedFile.toPath());
+                Files.copy(LSBStegnographyModel.getInstance().getDecoded().toPath(), selectedFile.toPath());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } 

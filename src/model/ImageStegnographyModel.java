@@ -9,7 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.awt.image.BufferedImage;
 
-public abstract class ImageStegnography_M {
+public abstract class ImageStegnographyModel {
     protected File source, endodedFile, decodedFile;
 
     // Set source image
@@ -81,7 +81,7 @@ public abstract class ImageStegnography_M {
     }
 
     // Steganograph the files 
-    public abstract void encode(TargetFile_M targetFile);
+    public abstract void encode(TargetFileModel targetFile);
 
     // Desteganograph the files
     public abstract void decode();

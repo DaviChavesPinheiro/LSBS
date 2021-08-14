@@ -6,16 +6,16 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class App_V extends JFrame {
-    private static App_V instance = null;
-    public static App_V getInstance() {
+public class AppView extends JFrame {
+    private static AppView instance = null;
+    public static AppView getInstance() {
         if(instance == null) {
-            instance = new App_V();
+            instance = new AppView();
         }
         return instance;
     }
     
-    public App_V() {
+    public AppView() {
         super("LSBS");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,8 +27,8 @@ public class App_V extends JFrame {
         // Create Main Panel
         JPanel mPanel = new JPanel();
         mPanel.setLayout(new BorderLayout());
-        mPanel.add(new SideBar_V(), BorderLayout.LINE_START);
-        mPanel.add(new Content_V(), BorderLayout.CENTER);
+        mPanel.add(new SideBarView(), BorderLayout.LINE_START);
+        mPanel.add(new ContentView(), BorderLayout.CENTER);
         
         // Add Panel
         this.setContentPane(mPanel);

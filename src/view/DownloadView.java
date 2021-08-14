@@ -5,10 +5,10 @@ import java.nio.file.Path;
 
 import javax.swing.*;
 
-import src.controller.Download_C;
+import src.controller.DownloadController;
 
-public class Download_V extends JButton {
-    public Download_V() {
+public class DownloadView extends JButton {
+    public DownloadView() {
         super();
         this.setPreferredSize(new Dimension(15, 15));
         this.setMinimumSize(new Dimension(15, 15));
@@ -24,7 +24,7 @@ public class Download_V extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        Download_C controller = new Download_C();
+        DownloadController controller = new DownloadController();
         this.addActionListener(controller);
     }
 

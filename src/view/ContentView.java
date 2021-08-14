@@ -3,8 +3,8 @@ package src.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class Content_V extends JPanel {
-    public Content_V() {
+public class ContentView extends JPanel {
+    public ContentView() {
         this.setOpaque(true);
         this.setBackground(new Color(18, 18, 18));
         this.setPreferredSize(new Dimension(1080 / 4 * 3, 720));
@@ -14,12 +14,12 @@ public class Content_V extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 35)));
 
         // SourceArea
-        this.add(new SourceArea_V());
+        this.add(new SourceAreaView());
 
         // Margin
         this.add(Box.createRigidArea(new Dimension(0, 35)));
 
         // Files Area
-        this.add(FilesArea_V.getInstance());
+        this.add(FilesAreaView.getInstance());
     }
 }

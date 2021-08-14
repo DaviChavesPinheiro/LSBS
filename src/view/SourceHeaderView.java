@@ -3,8 +3,8 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class SourceHeader_V extends JPanel {
-    public SourceHeader_V() {
+public class SourceHeaderView extends JPanel {
+    public SourceHeaderView() {
         this.setOpaque(true);
         this.setBackground(new Color(56, 56, 56));
         this.setMaximumSize(new Dimension(640, 15));
@@ -12,6 +12,6 @@ public class SourceHeader_V extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         this.add(Box.createHorizontalGlue());
-        this.add(new Download_V());
+        this.add(new DownloadView());
     }
 }

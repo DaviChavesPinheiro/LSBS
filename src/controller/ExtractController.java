@@ -1,12 +1,12 @@
 package src.controller;
 
-import src.model.LSBStegnography_M;
-import src.view.FilesArea_V;
+import src.model.LSBStegnographyModel;
+import src.view.FilesAreaView;
 
 import java.awt.event.*;
 import java.io.File;
 
-public class Extract_C implements ActionListener {
+public class ExtractController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -23,10 +23,10 @@ public class Extract_C implements ActionListener {
         //     } 
         // }
         try {
-            LSBStegnography_M.getInstance().decode();
-            File[] decodedFiles = LSBStegnography_M.getInstance().getDecodedFiles();
+            LSBStegnographyModel.getInstance().decode();
+            File[] decodedFiles = LSBStegnographyModel.getInstance().getDecodedFiles();
             for(File file: decodedFiles) {
-                FilesArea_V.getInstance().addFile(file);
+                FilesAreaView.getInstance().addFile(file);
             }
         } catch (Exception err) {
             System.out.println(err.getMessage());

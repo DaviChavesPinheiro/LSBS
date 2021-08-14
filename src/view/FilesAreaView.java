@@ -3,28 +3,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class FilesArea_V extends JPanel {
-    private static FilesArea_V instance = null;
-    public static FilesArea_V getInstance() {
+public class FilesAreaView extends JPanel {
+    private static FilesAreaView instance = null;
+    public static FilesAreaView getInstance() {
         if(instance == null) {
-            instance = new FilesArea_V();
+            instance = new FilesAreaView();
         }
         return instance;
     }
     
-    public FilesArea_V() {
+    public FilesAreaView() {
         this.setOpaque(false);
         this.setMaximumSize(new Dimension(1080 / 4 * 3 - 50, 720 - (360 + 35 + 35 + 20)));
 
         this.setLayout(new FlowLayout());
         this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        this.add(new Extract_V());
-        this.add(new AddFile_V());
-        this.add(new SaveAll_V());
+        this.add(new ExtractView());
+        this.add(new AddFileView());
+        this.add(new SaveAllView());
     }
 
     public void addFile(File file) {
-        this.add(new File_V(file));
+        this.add(new FileView(file));
         this.revalidate();
         this.repaint();
     }

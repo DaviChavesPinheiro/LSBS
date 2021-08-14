@@ -2,17 +2,17 @@ package src.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
 import java.nio.file.Path;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import src.controller.SaveAll_C;
-
 import java.awt.*;
 
-public class SaveAll_V extends JButton {
-    public SaveAll_V() {
+public class FileView extends JButton {
+    File file;
+    public FileView(File file) {
         super();
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(80, 80));
@@ -25,23 +25,20 @@ public class SaveAll_V extends JButton {
         this.setVerticalTextPosition(AbstractButton.BOTTOM);
         this.setHorizontalTextPosition(AbstractButton.CENTER);
 
-        this.setText("Save All");
+        this.setText(file.getName());
         this.setIconTextGap(6);
 
-        Path imgAbsPath = Path.of("src/images/save-icon.png").toAbsolutePath();
+        Path imgAbsPath = Path.of("src/images/file-icon.png").toAbsolutePath();
         ImageIcon img = new ImageIcon(imgAbsPath.toString());
         this.setIcon(img);
 
         Border line = new LineBorder(new Color(56, 56, 56));
-        Border margin = new EmptyBorder(15, 0, 0, 0);
+        Border margin = new EmptyBorder(15, 3, 0, 3);
         Border compound = new CompoundBorder(line, margin);
         this.setBorder(compound);
 
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
-        
-        SaveAll_C controller = new SaveAll_C();
-        this.addActionListener(controller);
     }
 
     @Override

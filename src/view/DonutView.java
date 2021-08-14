@@ -2,11 +2,11 @@ package src.view;
 import java.awt.Color;
 
 import javax.swing.*;
-public class Donut_V extends JLabel {
-    private static Donut_V instance = null;
-    public static Donut_V getInstance() {
+public class DonutView extends JLabel {
+    private static DonutView instance = null;
+    public static DonutView getInstance() {
         if(instance == null) {
-            instance = new Donut_V();
+            instance = new DonutView();
         }
         return instance;
     }
@@ -14,7 +14,7 @@ public class Donut_V extends JLabel {
     private long maxSpace = 0;
     private long usedSpace = 0;
 
-    public Donut_V() {
+    public DonutView() {
         this.setSpaceUsed(0);
         this.setForeground(new Color(135, 135, 135));
     }

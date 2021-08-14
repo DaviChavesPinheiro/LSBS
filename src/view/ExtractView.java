@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import src.controller.Extract_C;
+import src.controller.ExtractController;
 
 import java.awt.*;
 
-public class Extract_V extends JButton {
-    public Extract_V() {
+public class ExtractView extends JButton {
+    public ExtractView() {
         super();
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(80, 80));
@@ -40,7 +40,7 @@ public class Extract_V extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        Extract_C controller = new Extract_C();
+        ExtractController controller = new ExtractController();
         this.addActionListener(controller);
     }
 

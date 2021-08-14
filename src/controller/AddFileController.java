@@ -2,17 +2,17 @@ package src.controller;
 
 import javax.swing.filechooser.FileSystemView;
 
-import src.model.LSBStegnography_M;
-import src.model.TargetFile_M;
-import src.view.Donut_V;
-import src.view.FilesArea_V;
-import src.view.SourceContent_V;
+import src.model.LSBStegnographyModel;
+import src.model.TargetFileModel;
+import src.view.DonutView;
+import src.view.FilesAreaView;
+import src.view.SourceContentView;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 
-public class AddFile_C implements ActionListener {
+public class AddFileController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -23,20 +23,20 @@ public class AddFile_C implements ActionListener {
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File[] selectedFiles = fileChooser.getSelectedFiles();
-            TargetFile_M targetFile = TargetFile_M.getInstance();
+            TargetFileModel targetFile = TargetFileModel.getInstance();
             try {
                 for(File file: selectedFiles) {
                     targetFile.addSubFile(file);
-                    FilesArea_V.getInstance().addFile(file);
+                    FilesAreaView.getInstance().addFile(file);
                 }
                 
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } finally {
-                Donut_V.getInstance().setSpaceUsed(targetFile.getTargetFileSize());
-                LSBStegnography_M lsbStegnography = LSBStegnography_M.getInstance();
+                DonutView.getInstance().setSpaceUsed(targetFile.getTargetFileSize());
+                LSBStegnographyModel lsbStegnography = LSBStegnographyModel.getInstance();
                 lsbStegnography.encode(targetFile);
-                SourceContent_V.getInstance().refresh();
+                SourceContentView.getInstance().refresh();
             }
         }
     }
