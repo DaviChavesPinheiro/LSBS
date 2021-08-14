@@ -1,14 +1,17 @@
 package src;
 
 import javax.swing.JFrame;
-import src.view.ContentView;
-import src.view.SideBarView;
+
+import src.view.Content.ContentView;
+import src.view.SideBar.SideBarView;
+
 import java.nio.file.Path;
 import javax.swing.*;
 import java.awt.*;
 
 public class Main {
     private static void createAndShowGUI() {
+        // Config Frame
         JFrame app = new JFrame("LSBS");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -17,7 +20,7 @@ public class Main {
         ImageIcon img = new ImageIcon(imgAbsPath.toString());
         app.setIconImage(img.getImage());
 
-        // Create Main Panel
+        // Create Main Panel and set Subpanels
         JPanel mPanel = new JPanel();
         mPanel.setLayout(new BorderLayout());
         mPanel.add(new SideBarView(), BorderLayout.LINE_START);

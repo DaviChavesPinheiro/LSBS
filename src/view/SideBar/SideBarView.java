@@ -1,6 +1,7 @@
-package src.view;
+package src.view.SideBar;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class SideBarView extends JPanel  {

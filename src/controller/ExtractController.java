@@ -1,7 +1,7 @@
 package src.controller;
 
 import src.model.LSBStegnographyModel;
-import src.view.FilesAreaView;
+import src.view.Content.Files.FilesAreaView;
 
 import java.awt.event.*;
 import java.io.File;

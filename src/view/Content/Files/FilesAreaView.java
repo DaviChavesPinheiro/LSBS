@@ -1,5 +1,6 @@
-package src.view;
+package src.view.Content.Files;
 import javax.swing.*;
+
 import java.awt.*;
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package src.view;
+package src.view.Content.Source;
 import javax.swing.*;
 
 import src.controller.SourceContentController;

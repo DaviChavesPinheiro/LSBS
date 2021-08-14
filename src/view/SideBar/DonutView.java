@@ -1,4 +1,4 @@
-package src.view;
+package src.view.SideBar;
 import java.awt.Color;
 
 import javax.swing.*;

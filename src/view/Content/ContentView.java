@@ -1,6 +1,10 @@
-package src.view;
+package src.view.Content;
 
 import javax.swing.*;
+
+import src.view.Content.Files.FilesAreaView;
+import src.view.Content.Source.SourceView;
+
 import java.awt.*;
 
 public class ContentView extends JPanel {
@@ -14,7 +18,7 @@ public class ContentView extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 35)));
 
         // SourceArea
-        this.add(new SourceAreaView());
+        this.add(new SourceView());
 
         // Margin
         this.add(Box.createRigidArea(new Dimension(0, 35)));

@@ -1,4 +1,4 @@
-package src.view;
+package src.view.Content.Source;
 import javax.swing.*;
 
 import java.awt.*;
@@ -12,6 +12,6 @@ public class SourceHeaderView extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         this.add(Box.createHorizontalGlue());
-        this.add(new DownloadView());
+        this.add(new DownloadButtonView());
     }
 }

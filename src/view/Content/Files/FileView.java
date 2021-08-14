@@ -1,18 +1,18 @@
-package src.view;
+package src.view.Content.Files;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
 import java.nio.file.Path;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import src.controller.AddFileController;
-
 import java.awt.*;
 
-public class AddFileView extends JButton {
-    public AddFileView() {
+public class FileView extends JButton {
+    File file;
+    public FileView(File file) {
         super();
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(80, 80));
@@ -25,23 +25,20 @@ public class AddFileView extends JButton {
         this.setVerticalTextPosition(AbstractButton.BOTTOM);
         this.setHorizontalTextPosition(AbstractButton.CENTER);
 
-        this.setText("Add File");
+        this.setText(file.getName());
         this.setIconTextGap(6);
 
-        Path imgAbsPath = Path.of("src/images/add-icon.png").toAbsolutePath();
+        Path imgAbsPath = Path.of("src/images/file-icon.png").toAbsolutePath();
         ImageIcon img = new ImageIcon(imgAbsPath.toString());
         this.setIcon(img);
 
         Border line = new LineBorder(new Color(56, 56, 56));
-        Border margin = new EmptyBorder(15, 0, 0, 0);
+        Border margin = new EmptyBorder(15, 3, 0, 3);
         Border compound = new CompoundBorder(line, margin);
         this.setBorder(compound);
 
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
-        
-        AddFileController controller = new AddFileController();
-        this.addActionListener(controller);
     }
 
     @Override

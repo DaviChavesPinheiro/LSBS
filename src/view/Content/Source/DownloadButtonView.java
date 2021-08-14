@@ -1,4 +1,4 @@
-package src.view;
+package src.view.Content.Source;
 
 import java.awt.Dimension;
 import java.nio.file.Path;
@@ -7,8 +7,8 @@ import javax.swing.*;
 
 import src.controller.DownloadController;
 
-public class DownloadView extends JButton {
-    public DownloadView() {
+public class DownloadButtonView extends JButton {
+    public DownloadButtonView() {
         super();
         this.setPreferredSize(new Dimension(15, 15));
         this.setMinimumSize(new Dimension(15, 15));

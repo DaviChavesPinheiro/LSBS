@@ -1,4 +1,4 @@
-package src.view;
+package src.view.Content.Files;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import src.controller.SaveAllController;
+import src.controller.AddFileController;
 
 import java.awt.*;
 
-public class SaveAllView extends JButton {
-    public SaveAllView() {
+public class AddFileView extends JButton {
+    public AddFileView() {
         super();
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(80, 80));
@@ -25,10 +25,10 @@ public class SaveAllView extends JButton {
         this.setVerticalTextPosition(AbstractButton.BOTTOM);
         this.setHorizontalTextPosition(AbstractButton.CENTER);
 
-        this.setText("Save All");
+        this.setText("Add File");
         this.setIconTextGap(6);
 
-        Path imgAbsPath = Path.of("src/images/save-icon.png").toAbsolutePath();
+        Path imgAbsPath = Path.of("src/images/add-icon.png").toAbsolutePath();
         ImageIcon img = new ImageIcon(imgAbsPath.toString());
         this.setIcon(img);
 
@@ -40,7 +40,7 @@ public class SaveAllView extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        SaveAllController controller = new SaveAllController();
+        AddFileController controller = new AddFileController();
         this.addActionListener(controller);
     }
 

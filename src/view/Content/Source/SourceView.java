@@ -1,9 +1,9 @@
-package src.view;
+package src.view.Content.Source;
 import javax.swing.*;
 import java.awt.*;
 
-public class SourceAreaView extends JPanel {
-    public SourceAreaView() {
+public class SourceView extends JPanel {
+    public SourceView() {
         this.setOpaque(true);
         this.setBackground(new Color(29, 29, 29));
         this.setBorder(BorderFactory.createLineBorder(new Color(56, 56, 56), 2));
