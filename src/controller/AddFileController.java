@@ -36,7 +36,6 @@ public class AddFileController implements ActionListener {
                 DonutView.getInstance().setSpaceUsed(targetFile.getTargetFileSize());
                 LSBStegnographyModel lsbStegnography = LSBStegnographyModel.getInstance();
                 lsbStegnography.encode(targetFile);
-                SourceContentView.getInstance().refresh();
             }
         }
     }

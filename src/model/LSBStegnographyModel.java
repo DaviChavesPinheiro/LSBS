@@ -13,9 +13,7 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
         }
         return instance;
     }
-
-    public LSBStegnographyModel() {}
-
+    
     @Override
     public void encode(TargetFileModel targetFile) {
         try {
@@ -44,7 +42,7 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
 
             if(endodedFile != null) endodedFile.delete();
 
-            endodedFile = File.createTempFile("LSBS-", "-endodedFile.png");
+            setEncoded(File.createTempFile("LSBS-", "-endodedFile.png"));
             endodedFile.deleteOnExit();
 
             ImageIO.write(image, "png", endodedFile);

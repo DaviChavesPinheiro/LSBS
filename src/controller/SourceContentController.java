@@ -12,10 +12,12 @@ import java.awt.event.*;
 import java.io.File;
 import java.awt.*;
 public class SourceContentController implements MouseListener {
+    private LSBStegnographyModel model;
     private JPanel view;
 
-    public SourceContentController(JPanel view) {
+    public SourceContentController(LSBStegnographyModel model, JPanel view) {
         super();
+        this.model = model;
         this.view = view;
     }
 
@@ -29,11 +31,11 @@ public class SourceContentController implements MouseListener {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                LSBStegnographyModel lsbStegnography = LSBStegnographyModel.getInstance();
-                lsbStegnography.setSource(selectedFile);
-                if(!TargetFileModel.getInstance().isEmpty()) lsbStegnography.encode(TargetFileModel.getInstance());
-                DonutView.getInstance().setMaxSpace(lsbStegnography.getMaxSpaceAvailable());
-                SourceContentView.getInstance().refresh();
+                model.setSource(selectedFile);
+                // TODO: colocar o targetfile para dentro do LSBStegnographyModel;
+                if(!TargetFileModel.getInstance().isEmpty()) model.encode(TargetFileModel.getInstance());
+                // TODO: remover DonutView.getInstance()...
+                DonutView.getInstance().setMaxSpace(model.getMaxSpaceAvailable());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }

@@ -11,6 +11,11 @@ import java.awt.image.BufferedImage;
 
 public abstract class ImageStegnographyModel {
     protected File source, endodedFile, decodedFile;
+    public EventManeger events;
+
+    public ImageStegnographyModel() {
+        this.events = new EventManeger();
+    }
 
     // Set source image
     public void setSource(String path) throws Exception {
@@ -24,11 +29,16 @@ public abstract class ImageStegnographyModel {
         BufferedImage image = ImageIO.read(file);
         if(image == null) throw new Exception("[Error]: File is not an image.");
         this.source = file;
-        this.endodedFile = file;
+        setEncoded(file);
     }
 
     public File getSource() {
         return source;
+    }
+
+    public void setEncoded(File file) {
+        this.endodedFile = file;
+        events.notify("ENCODED_UPDATE", this);
     }
 
     public File getEncoded() {
