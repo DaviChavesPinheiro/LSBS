@@ -20,7 +20,7 @@ public class SourceContentView extends JPanel implements EventListener {
         return instance;
     }
 
-    private JLabel pngImage;
+    private ImageIcon pngImage;
 
     public SourceContentView() {
         this.setOpaque(true);
@@ -28,11 +28,8 @@ public class SourceContentView extends JPanel implements EventListener {
         this.setLayout(new BorderLayout());
         
         Path imgAbsPath = Path.of("src/images/png-icon.png").toAbsolutePath();
-        ImageIcon img = new ImageIcon(imgAbsPath.toString());
-        this.pngImage = new JLabel(img);
-        
-        // TODO: Remover
-        this.onEvent(null, null);
+        pngImage = new ImageIcon(imgAbsPath.toString());
+        setImage(pngImage);
         
         SourceContentController controller = new SourceContentController(LSBStegnographyModel.getInstance(), this);
         this.addMouseListener(controller);
@@ -42,23 +39,28 @@ public class SourceContentView extends JPanel implements EventListener {
 
     @Override
     public void onEvent(EventTypes eventType, Object model) {
-        if(model == null) {
-            resetImage();
-            return;
-        }
-        ImageStegnographyModel imageStegnographyModel = (ImageStegnographyModel)model;
-        File encodedFile = imageStegnographyModel.getEncoded();
-        if(encodedFile != null) {
-            this.removeAll();
-            ImageIcon img = new ImageIcon((new ImageIcon(encodedFile.getAbsolutePath())).getImage().getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT));
-            this.add(new JLabel(img), BorderLayout.CENTER);
-        } else {
-            resetImage();
+
+        switch (eventType) {
+            case LSB_ENCODE:
+                ImageStegnographyModel imageStegnographyModel = (ImageStegnographyModel)model;
+                File encodedFile = imageStegnographyModel.getEncoded();
+                setImage(new ImageIcon((new ImageIcon(encodedFile.getAbsolutePath())).getImage().getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT)));
+                break;
+            case LSB_ENCODED_REMOVED:
+                removeImage();
+                break;
+            default:
+                break;
         }
     }
 
-    private void resetImage() {
+    private void setImage(ImageIcon img) {
         this.removeAll();
-        this.add(pngImage, BorderLayout.CENTER);
+        this.add(new JLabel(img), BorderLayout.CENTER);
+    }
+
+    private void removeImage() {
+        this.removeAll();
+        this.add(new JLabel(pngImage), BorderLayout.CENTER);
     }
 }

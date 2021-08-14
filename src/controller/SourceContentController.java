@@ -4,20 +4,18 @@ import javax.swing.filechooser.FileSystemView;
 
 import src.model.LSBStegnographyModel;
 import src.model.TargetFileModel;
-import src.view.Content.Source.SourceContentView;
-import src.view.SideBar.DonutView;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.awt.*;
 public class SourceContentController implements MouseListener {
-    private LSBStegnographyModel model;
+    private LSBStegnographyModel lsbStegnographyModel;
     private JPanel view;
 
-    public SourceContentController(LSBStegnographyModel model, JPanel view) {
+    public SourceContentController(LSBStegnographyModel lsbStegnographyModel, JPanel view) {
         super();
-        this.model = model;
+        this.lsbStegnographyModel = lsbStegnographyModel;
         this.view = view;
     }
 
@@ -31,9 +29,9 @@ public class SourceContentController implements MouseListener {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                model.setSource(selectedFile);
+                lsbStegnographyModel.setSource(selectedFile);
                 // TODO: colocar o targetfile para dentro do LSBStegnographyModel;
-                if(!TargetFileModel.getInstance().isEmpty()) model.encode(TargetFileModel.getInstance());
+                if(!TargetFileModel.getInstance().isEmpty()) lsbStegnographyModel.encode(TargetFileModel.getInstance());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }

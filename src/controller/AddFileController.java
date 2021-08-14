@@ -13,6 +13,14 @@ import java.awt.event.*;
 import java.io.File;
 
 public class AddFileController implements ActionListener {
+    private TargetFileModel targetFileModel;
+    private LSBStegnographyModel lsbStegnographyModel;
+
+    public AddFileController(TargetFileModel targetFileModel, LSBStegnographyModel lsbStegnographyModel) {
+        this.targetFileModel = targetFileModel;
+        this.lsbStegnographyModel = lsbStegnographyModel;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -23,19 +31,15 @@ public class AddFileController implements ActionListener {
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File[] selectedFiles = fileChooser.getSelectedFiles();
-            TargetFileModel targetFile = TargetFileModel.getInstance();
             try {
                 for(File file: selectedFiles) {
-                    targetFile.addSubFile(file);
+                    targetFileModel.addSubFile(file);
                     FilesAreaView.getInstance().addFile(file);
                 }
-                
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } finally {
-                DonutView.getInstance().setSpaceUsed(targetFile.getTargetFileSize());
-                LSBStegnographyModel lsbStegnography = LSBStegnographyModel.getInstance();
-                lsbStegnography.encode(targetFile);
+                lsbStegnographyModel.encode(targetFileModel);
             }
         }
     }

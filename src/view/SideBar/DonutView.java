@@ -6,6 +6,7 @@ import javax.swing.*;
 import src.model.EventListener;
 import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
+import src.model.TargetFileModel;
 public class DonutView extends JLabel implements EventListener {
     private static DonutView instance = null;
     public static DonutView getInstance() {
@@ -22,21 +23,22 @@ public class DonutView extends JLabel implements EventListener {
         this.setSpaceUsed(0);
         this.setForeground(new Color(135, 135, 135));
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODE, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.TF_ADD_FILE, this);
     }
 
     // Espaco máximo
-    public void setMaxSpace(long space) {
+    private void setMaxSpace(long space) {
         this.maxSpace = space;
         refresh();
     }
 
     // Espaco usado
-    public void setSpaceUsed(long value) {
+    private void setSpaceUsed(long value) {
         this.usedSpace = value;
         refresh();
     }
 
-    public void refresh() {
+    private void refresh() {
         this.setText("" + Long.toString(maxSpace - usedSpace) + " KB available");
     }
 
@@ -47,8 +49,9 @@ public class DonutView extends JLabel implements EventListener {
                 LSBStegnographyModel lsbStegnographyModel = (LSBStegnographyModel)model;
                 setMaxSpace(lsbStegnographyModel.getMaxSpaceAvailable());
                 break;
-            case TF_CURRENT_SIZE:
-                System.out.println("DonutView Event: TF_CURRENT_SIZE");
+            case TF_ADD_FILE:
+                TargetFileModel targetFileModel = (TargetFileModel)model;
+                setSpaceUsed(targetFileModel.getTargetFileSize());
                 break;
         
             default:

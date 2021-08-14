@@ -5,9 +5,11 @@ public enum EventTypes {
     LSB_ENCODE,
     LSB_DECODE,
     LSB_SET_SOURCE,
-    LSB_ENCODED,
-    LSB_DECODED,
+    LSB_ENCODED_CHANGED,
+    LSB_ENCODED_REMOVED,
+    LSB_DECODED_CHANGED,
     // TargetFile events
     TF_MAX_SIZE,
-    TF_CURRENT_SIZE,
+    TF_ADD_FILE,
+    TF_REMOVE_FILE,
 }

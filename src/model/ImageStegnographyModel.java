@@ -32,6 +32,12 @@ public abstract class ImageStegnographyModel {
         setEncoded(file);
     }
 
+    // Remove source image
+    public void removeSource() {
+        this.source = null;
+        removeEncoded();
+    }
+
     public File getSource() {
         return source;
     }
@@ -39,6 +45,12 @@ public abstract class ImageStegnographyModel {
     public void setEncoded(File file) {
         this.endodedFile = file;
         events.notify(EventTypes.LSB_ENCODE, this);
+    }
+
+    public void removeEncoded() {
+        endodedFile.delete();
+        this.endodedFile = null;
+        events.notify(EventTypes.LSB_ENCODED_REMOVED, this);
     }
 
     public File getEncoded() {
@@ -83,11 +95,6 @@ public abstract class ImageStegnographyModel {
         }
         File[] filesArray = new File[filesList.size()];
         return filesList.toArray(filesArray);
-    }
-
-    // Remove source image
-    public void removeSource() {
-        this.source = null;
     }
 
     // Steganograph the files 

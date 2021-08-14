@@ -19,6 +19,11 @@ public class TargetFileModel {
     }
     private File targetFile;
     private List<File> subFiles = new ArrayList<File>();
+    public EventManeger events;
+
+    public TargetFileModel() {
+        this.events = new EventManeger();
+    }
 
     // Add a file to the subFiles list
     public File addSubFile(String path) throws Exception {
@@ -36,6 +41,7 @@ public class TargetFileModel {
         subFiles.add(file);
 
         zipSubFiles();
+        events.notify(EventTypes.TF_ADD_FILE, this);
         return file;
     }
 
@@ -43,9 +49,10 @@ public class TargetFileModel {
     public void removeSubFile(File file) {
         subFiles.remove(file);
         zipSubFiles();
+        events.notify(EventTypes.TF_REMOVE_FILE, this);
     }
 
-    // Return zipped subFiles
+    // Zipfiles subFiles
     private void zipSubFiles() {
         try {
             if(targetFile != null) targetFile.delete();
