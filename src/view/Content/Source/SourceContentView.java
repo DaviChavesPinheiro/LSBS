@@ -31,7 +31,8 @@ public class SourceContentView extends JPanel implements EventListener {
         ImageIcon img = new ImageIcon(imgAbsPath.toString());
         this.pngImage = new JLabel(img);
         
-        this.eventUpdate(null);
+        // TODO: Remover
+        this.onEvent(null, null);
         
         SourceContentController controller = new SourceContentController(LSBStegnographyModel.getInstance(), this);
         this.addMouseListener(controller);
@@ -40,7 +41,7 @@ public class SourceContentView extends JPanel implements EventListener {
     }
 
     @Override
-    public void eventUpdate(Object model) {
+    public void onEvent(EventTypes eventType, Object model) {
         if(model == null) {
             resetImage();
             return;

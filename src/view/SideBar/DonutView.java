@@ -41,8 +41,20 @@ public class DonutView extends JLabel implements EventListener {
     }
 
     @Override
-    public void eventUpdate(Object model) {
-        LSBStegnographyModel lsbStegnographyModel = (LSBStegnographyModel)model;
-        setMaxSpace(lsbStegnographyModel.getMaxSpaceAvailable());
+    public void onEvent(EventTypes eventType, Object model) {
+        switch (eventType) {
+            case LSB_ENCODE:
+                LSBStegnographyModel lsbStegnographyModel = (LSBStegnographyModel)model;
+                setMaxSpace(lsbStegnographyModel.getMaxSpaceAvailable());
+                break;
+            case TF_CURRENT_SIZE:
+                System.out.println("DonutView Event: TF_CURRENT_SIZE");
+                break;
+        
+            default:
+                break;
+        }
+
+        
     }
 }

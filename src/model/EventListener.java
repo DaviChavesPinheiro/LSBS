@@ -1,5 +1,5 @@
 package src.model;
 
 public interface EventListener {
-    void eventUpdate(Object model);
+    void onEvent(EventTypes eventType, Object model);
 }

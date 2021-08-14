@@ -12,7 +12,7 @@ public class EventManeger {
     public void notify(EventTypes eventType, Object data) {
         for (Event event : listeners) {
             if(event.type == eventType) {
-                event.listener.eventUpdate(data);
+                event.listener.onEvent(eventType, data);
             }
         }
     }
