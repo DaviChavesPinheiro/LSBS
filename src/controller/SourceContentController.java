@@ -34,8 +34,6 @@ public class SourceContentController implements MouseListener {
                 model.setSource(selectedFile);
                 // TODO: colocar o targetfile para dentro do LSBStegnographyModel;
                 if(!TargetFileModel.getInstance().isEmpty()) model.encode(TargetFileModel.getInstance());
-                // TODO: remover DonutView.getInstance()...
-                DonutView.getInstance().setMaxSpace(model.getMaxSpaceAvailable());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }

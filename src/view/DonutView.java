@@ -2,7 +2,10 @@ package src.view;
 import java.awt.Color;
 
 import javax.swing.*;
-public class DonutView extends JLabel {
+
+import src.model.EventListener;
+import src.model.LSBStegnographyModel;
+public class DonutView extends JLabel implements EventListener {
     private static DonutView instance = null;
     public static DonutView getInstance() {
         if(instance == null) {
@@ -17,6 +20,7 @@ public class DonutView extends JLabel {
     public DonutView() {
         this.setSpaceUsed(0);
         this.setForeground(new Color(135, 135, 135));
+        LSBStegnographyModel.getInstance().events.subscribe("ENCODED_UPDATE", this);
     }
 
     // Espaco máximo
@@ -33,5 +37,11 @@ public class DonutView extends JLabel {
 
     public void refresh() {
         this.setText("" + Long.toString(maxSpace - usedSpace) + " KB available");
+    }
+
+    @Override
+    public void eventUpdate(Object model) {
+        LSBStegnographyModel lsbStegnographyModel = (LSBStegnographyModel)model;
+        setMaxSpace(lsbStegnographyModel.getMaxSpaceAvailable());
     }
 }
