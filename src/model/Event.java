@@ -1,10 +1,10 @@
 package src.model;
 
 public class Event {
-    String type;
+    EventTypes type;
     EventListener listener;
     
-    public Event(String type, EventListener listener) {
+    public Event(EventTypes type, EventListener listener) {
         this.type = type;
         this.listener = listener;
     }

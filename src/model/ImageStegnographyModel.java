@@ -38,7 +38,7 @@ public abstract class ImageStegnographyModel {
 
     public void setEncoded(File file) {
         this.endodedFile = file;
-        events.notify("ENCODED_UPDATE", this);
+        events.notify(EventTypes.LSB_ENCODE, this);
     }
 
     public File getEncoded() {

@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import src.controller.SourceContentController;
 import src.model.EventListener;
+import src.model.EventTypes;
 import src.model.ImageStegnographyModel;
 import src.model.LSBStegnographyModel;
 
@@ -35,7 +36,7 @@ public class SourceContentView extends JPanel implements EventListener {
         SourceContentController controller = new SourceContentController(LSBStegnographyModel.getInstance(), this);
         this.addMouseListener(controller);
         // Subscribe to model
-        LSBStegnographyModel.getInstance().events.subscribe("ENCODED_UPDATE", this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODE, this);
     }
 
     @Override

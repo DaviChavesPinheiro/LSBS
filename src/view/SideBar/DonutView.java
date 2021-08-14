@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.*;
 
 import src.model.EventListener;
+import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
 public class DonutView extends JLabel implements EventListener {
     private static DonutView instance = null;
@@ -20,7 +21,7 @@ public class DonutView extends JLabel implements EventListener {
     public DonutView() {
         this.setSpaceUsed(0);
         this.setForeground(new Color(135, 135, 135));
-        LSBStegnographyModel.getInstance().events.subscribe("ENCODED_UPDATE", this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODE, this);
     }
 
     // Espaco máximo
