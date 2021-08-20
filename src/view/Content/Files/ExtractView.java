@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import src.controller.ExtractController;
+import src.model.LSBStegnographyModel;
 
 import java.awt.*;
 
@@ -40,7 +41,7 @@ public class ExtractView extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        ExtractController controller = new ExtractController();
+        ExtractController controller = new ExtractController(LSBStegnographyModel.getInstance());
         this.addActionListener(controller);
     }
 

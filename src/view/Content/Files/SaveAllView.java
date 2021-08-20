@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import src.controller.SaveAllController;
+import src.model.LSBStegnographyModel;
 
 import java.awt.*;
 
@@ -40,7 +41,7 @@ public class SaveAllView extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        SaveAllController controller = new SaveAllController();
+        SaveAllController controller = new SaveAllController(LSBStegnographyModel.getInstance());
         this.addActionListener(controller);
     }
 

@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 public class DownloadController implements ActionListener {
     private LSBStegnographyModel lsbStegnographyModel;
@@ -21,7 +22,7 @@ public class DownloadController implements ActionListener {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                Files.copy(lsbStegnographyModel.getEncoded().toPath(), selectedFile.toPath());
+                Files.copy(lsbStegnographyModel.getEncoded().toPath(), selectedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } 
