@@ -28,7 +28,7 @@ public class FileView extends JButton {
         this.setText(file.getName());
         this.setIconTextGap(6);
 
-        Path imgAbsPath = Path.of("src/images/file-icon.png").toAbsolutePath();
+        Path imgAbsPath = Path.of("src/images/binary-file-icon.png").toAbsolutePath();
         ImageIcon img = new ImageIcon(imgAbsPath.toString());
         this.setIcon(img);
 
