@@ -29,7 +29,6 @@ public class SourceContentController implements MouseListener {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 lsbStegnographyModel.setSource(selectedFile);
-                // TODO: colocar o targetfile para dentro do LSBStegnographyModel;
                 if(!lsbStegnographyModel.targetFile.isEmpty()) lsbStegnographyModel.encode();
             } catch (Exception err) {
                 System.out.println(err.getMessage());

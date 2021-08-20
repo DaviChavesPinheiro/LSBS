@@ -16,6 +16,6 @@ public class SourceView extends JPanel {
         this.add(new SourceHeaderView());
 
         // SourceContent
-        this.add(SourceContentView.getInstance());
+        this.add(new SourceContentView());
     }
 }

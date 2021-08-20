@@ -12,14 +12,6 @@ import java.io.File;
 import java.nio.file.Path;
 
 public class SourceContentView extends JPanel implements EventListener {
-    private static SourceContentView instance = null;
-    public static SourceContentView getInstance() {
-        if(instance == null) {
-            instance = new SourceContentView();
-        }
-        return instance;
-    }
-
     private ImageIcon pngImage;
 
     public SourceContentView() {

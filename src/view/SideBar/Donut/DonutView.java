@@ -1,5 +1,6 @@
-package src.view.SideBar;
-import java.awt.Color;
+package src.view.SideBar.Donut;
+
+import java.awt.Dimension;
 
 import javax.swing.*;
 
@@ -7,21 +8,20 @@ import src.model.EventListener;
 import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
 import src.model.TargetFileModel;
-public class DonutView extends JLabel implements EventListener {
-    private static DonutView instance = null;
-    public static DonutView getInstance() {
-        if(instance == null) {
-            instance = new DonutView();
-        }
-        return instance;
-    }
-    
+public class DonutView extends JPanel implements EventListener {
+    private DonutContentView text;
     private long maxSpace = 0;
     private long usedSpace = 0;
 
     public DonutView() {
+        text = new DonutContentView();
+        this.add(text);
+
+        this.setOpaque(false);
+        this.setPreferredSize(new Dimension(1080 / 4 * 1 - 40, 1080 / 4 * 1 - 40));
         this.setSpaceUsed(0);
-        this.setForeground(new Color(135, 135, 135));
+
+        // Subscribe to model
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.TF_ADD_FILE, this);
     }
@@ -39,7 +39,7 @@ public class DonutView extends JLabel implements EventListener {
     }
 
     private void refresh() {
-        this.setText("" + Long.toString(maxSpace - usedSpace) + " KB available");
+        text.setValue(maxSpace - usedSpace);
     }
 
     @Override
