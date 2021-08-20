@@ -9,6 +9,10 @@ import java.io.File;
 import java.nio.file.Files;
 
 public class DownloadController implements ActionListener {
+    private LSBStegnographyModel lsbStegnographyModel;
+    public DownloadController(LSBStegnographyModel lsbStegnographyModel) {
+        this.lsbStegnographyModel = lsbStegnographyModel;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -17,7 +21,7 @@ public class DownloadController implements ActionListener {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                Files.copy(LSBStegnographyModel.getInstance().getEncoded().toPath(), selectedFile.toPath());
+                Files.copy(lsbStegnographyModel.getEncoded().toPath(), selectedFile.toPath());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } 

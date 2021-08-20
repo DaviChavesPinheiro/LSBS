@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import javax.swing.*;
 
 import src.controller.DownloadController;
+import src.model.LSBStegnographyModel;
 
 public class DownloadButtonView extends JButton {
     public DownloadButtonView() {
@@ -24,7 +25,7 @@ public class DownloadButtonView extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        DownloadController controller = new DownloadController();
+        DownloadController controller = new DownloadController(LSBStegnographyModel.getInstance());
         this.addActionListener(controller);
     }
 
