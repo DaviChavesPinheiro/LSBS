@@ -87,13 +87,14 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
 
             if(decodedFile != null) decodedFile.delete();
 
-            decodedFile = File.createTempFile("LSBS-", "-decodedFile");
+            decodedFile = File.createTempFile("LSBS-", "-decodedFile.png");
             decodedFile.deleteOnExit();
 
             OutputStream stream = new FileOutputStream(decodedFile);
             stream.write(bytes);
             stream.close();
 
+            events.notify(EventTypes.LSB_DECODE, this);
         } catch (Exception e) {
             System.out.println("Exception occured :" + e.getMessage());
         }
