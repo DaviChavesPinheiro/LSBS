@@ -17,7 +17,7 @@ public abstract class ImageStegnographyModel {
 
     public ImageStegnographyModel() {
         this.events = new EventManeger();
-        this.targetFile = new TargetFileModel();
+        this.targetFile = new TargetFileModel(events);
     }
 
     // Set source image

@@ -14,8 +14,8 @@ public class TargetFileModel {
     private List<File> subFiles = new ArrayList<File>();
     public EventManeger events;
 
-    public TargetFileModel() {
-        this.events = new EventManeger();
+    public TargetFileModel(EventManeger events) {
+        this.events = events;
     }
 
     // Add a file to the subFiles list

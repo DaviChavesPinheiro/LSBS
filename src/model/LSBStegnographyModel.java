@@ -42,10 +42,11 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
 
             if(endodedFile != null) endodedFile.delete();
 
-            setEncoded(File.createTempFile("LSBS-", "-endodedFile.png"));
+            File file = File.createTempFile("LSBS-", "-endodedFile.png");
+            ImageIO.write(image, "png", file);
+            setEncoded(file);
             endodedFile.deleteOnExit();
 
-            ImageIO.write(image, "png", endodedFile);
         } catch (Exception e) {
             System.out.println("Exception occured:" + e.getMessage());
         }

@@ -18,6 +18,7 @@ public class AddFileController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Abre o file chooser
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -25,6 +26,7 @@ public class AddFileController implements ActionListener {
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
+            // Adiciona os arquivos selecionados
             File[] selectedFiles = fileChooser.getSelectedFiles();
             try {
                 for(File file: selectedFiles) {
