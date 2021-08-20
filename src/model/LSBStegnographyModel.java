@@ -15,7 +15,7 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
     }
     
     @Override
-    public void encode(TargetFileModel targetFile) {
+    public void encode() {
         try {
             BufferedImage image = ImageIO.read(this.source);
             byte[] targetFileBytes = targetFile.getFileBytes();

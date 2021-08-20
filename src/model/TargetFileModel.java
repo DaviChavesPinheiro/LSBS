@@ -10,13 +10,6 @@ import java.util.zip.*;
 
 // TargetFile represents a file (zip) with multiples sub files
 public class TargetFileModel {
-    private static TargetFileModel instance = null;
-    public static TargetFileModel getInstance() {
-        if(instance == null) {
-            instance = new TargetFileModel();
-        }
-        return instance;
-    }
     private File targetFile;
     private List<File> subFiles = new ArrayList<File>();
     public EventManeger events;

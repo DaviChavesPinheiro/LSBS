@@ -12,10 +12,12 @@ import java.awt.image.BufferedImage;
 
 public abstract class ImageStegnographyModel {
     protected File source, endodedFile, decodedFile;
+    public TargetFileModel targetFile;
     public EventManeger events;
 
     public ImageStegnographyModel() {
         this.events = new EventManeger();
+        this.targetFile = new TargetFileModel();
     }
 
     // Set source image
@@ -97,7 +99,7 @@ public abstract class ImageStegnographyModel {
     }
 
     // Steganograph the files 
-    public abstract void encode(TargetFileModel targetFile);
+    public abstract void encode();
 
     // Desteganograph the files
     public abstract void decode();

@@ -3,7 +3,6 @@ package src.controller;
 import javax.swing.filechooser.FileSystemView;
 
 import src.model.LSBStegnographyModel;
-import src.model.TargetFileModel;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -31,7 +30,7 @@ public class SourceContentController implements MouseListener {
             try {
                 lsbStegnographyModel.setSource(selectedFile);
                 // TODO: colocar o targetfile para dentro do LSBStegnographyModel;
-                if(!TargetFileModel.getInstance().isEmpty()) lsbStegnographyModel.encode(TargetFileModel.getInstance());
+                if(!lsbStegnographyModel.targetFile.isEmpty()) lsbStegnographyModel.encode();
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }

@@ -9,7 +9,6 @@ import javax.swing.border.*;
 
 import src.controller.AddFileController;
 import src.model.LSBStegnographyModel;
-import src.model.TargetFileModel;
 
 import java.awt.*;
 
@@ -42,7 +41,7 @@ public class AddFileView extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
         
-        AddFileController controller = new AddFileController(TargetFileModel.getInstance(), LSBStegnographyModel.getInstance());
+        AddFileController controller = new AddFileController(LSBStegnographyModel.getInstance());
         this.addActionListener(controller);
     }
 

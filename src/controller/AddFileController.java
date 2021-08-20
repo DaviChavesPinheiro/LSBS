@@ -3,7 +3,6 @@ package src.controller;
 import javax.swing.filechooser.FileSystemView;
 
 import src.model.LSBStegnographyModel;
-import src.model.TargetFileModel;
 import src.view.Content.Files.FilesAreaView;
 
 import javax.swing.*;
@@ -11,11 +10,9 @@ import java.awt.event.*;
 import java.io.File;
 
 public class AddFileController implements ActionListener {
-    private TargetFileModel targetFileModel;
     private LSBStegnographyModel lsbStegnographyModel;
 
-    public AddFileController(TargetFileModel targetFileModel, LSBStegnographyModel lsbStegnographyModel) {
-        this.targetFileModel = targetFileModel;
+    public AddFileController(LSBStegnographyModel lsbStegnographyModel) {
         this.lsbStegnographyModel = lsbStegnographyModel;
     }
 
@@ -31,13 +28,13 @@ public class AddFileController implements ActionListener {
             File[] selectedFiles = fileChooser.getSelectedFiles();
             try {
                 for(File file: selectedFiles) {
-                    targetFileModel.addSubFile(file);
+                    lsbStegnographyModel.targetFile.addSubFile(file);
                     FilesAreaView.getInstance().addFile(file);
                 }
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } finally {
-                lsbStegnographyModel.encode(targetFileModel);
+                lsbStegnographyModel.encode();
             }
         }
     }
