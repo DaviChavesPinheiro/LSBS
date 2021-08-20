@@ -24,6 +24,6 @@ public class ContentView extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 35)));
 
         // Files Area
-        this.add(FilesAreaView.getInstance());
+        this.add(new FilesAreaView());
     }
 }

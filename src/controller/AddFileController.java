@@ -3,7 +3,6 @@ package src.controller;
 import javax.swing.filechooser.FileSystemView;
 
 import src.model.LSBStegnographyModel;
-import src.view.Content.Files.FilesAreaView;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -31,11 +30,11 @@ public class AddFileController implements ActionListener {
             try {
                 for(File file: selectedFiles) {
                     lsbStegnographyModel.targetFile.addSubFile(file);
-                    FilesAreaView.getInstance().addFile(file);
                 }
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             } finally {
+                // Faz o encode de todos os arquivos
                 lsbStegnographyModel.encode();
             }
         }

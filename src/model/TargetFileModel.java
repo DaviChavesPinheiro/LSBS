@@ -45,6 +45,11 @@ public class TargetFileModel {
         events.notify(EventTypes.TF_REMOVE_FILE, this);
     }
 
+    // Return subfiles
+    public List<File> getSubFiles() {
+        return subFiles;
+    }
+
     // Zipfiles subFiles
     private void zipSubFiles() {
         try {

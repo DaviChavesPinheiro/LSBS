@@ -26,7 +26,8 @@ public class ExtractController implements ActionListener {
             LSBStegnographyModel.getInstance().decode();
             File[] decodedFiles = LSBStegnographyModel.getInstance().getDecodedFiles();
             for(File file: decodedFiles) {
-                FilesAreaView.getInstance().addFile(file);
+                // TODO: 
+                // FilesAreaView.getInstance().addFile(file);
             }
         } catch (Exception err) {
             System.out.println(err.getMessage());
