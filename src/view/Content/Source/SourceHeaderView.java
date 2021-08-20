@@ -11,6 +11,7 @@ public class SourceHeaderView extends JPanel {
         this.setMinimumSize(new Dimension(640, 15));
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
+        this.add(new DeleteButtonView());
         this.add(Box.createHorizontalGlue());
         this.add(new DownloadButtonView());
     }

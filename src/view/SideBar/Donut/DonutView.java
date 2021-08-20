@@ -24,6 +24,7 @@ public class DonutView extends JPanel implements EventListener {
         // Subscribe to model
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.TF_ADD_FILE, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_REMOVED, this);
     }
 
     // Espaco máximo
@@ -52,6 +53,10 @@ public class DonutView extends JPanel implements EventListener {
             case TF_ADD_FILE:
                 TargetFileModel targetFileModel = (TargetFileModel)model;
                 setSpaceUsed(targetFileModel.getTargetFileSize());
+                break;
+            case LSB_ENCODED_REMOVED:
+                setMaxSpace(0);
+                setSpaceUsed(0);
                 break;
         
             default:

@@ -27,6 +27,7 @@ public class SourceContentView extends JPanel implements EventListener {
         this.addMouseListener(controller);
         // Subscribe to model
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_REMOVED, this);
     }
 
     @Override
