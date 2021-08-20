@@ -22,7 +22,7 @@ public class DonutView extends JLabel implements EventListener {
     public DonutView() {
         this.setSpaceUsed(0);
         this.setForeground(new Color(135, 135, 135));
-        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODE, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
         LSBStegnographyModel.getInstance().events.subscribe(EventTypes.TF_ADD_FILE, this);
     }
 
@@ -45,7 +45,7 @@ public class DonutView extends JLabel implements EventListener {
     @Override
     public void onEvent(EventTypes eventType, Object model) {
         switch (eventType) {
-            case LSB_ENCODE:
+            case LSB_ENCODED_SET:
                 LSBStegnographyModel lsbStegnographyModel = (LSBStegnographyModel)model;
                 setMaxSpace(lsbStegnographyModel.getMaxSpaceAvailable());
                 break;

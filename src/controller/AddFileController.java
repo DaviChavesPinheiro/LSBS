@@ -5,8 +5,6 @@ import javax.swing.filechooser.FileSystemView;
 import src.model.LSBStegnographyModel;
 import src.model.TargetFileModel;
 import src.view.Content.Files.FilesAreaView;
-import src.view.Content.Source.SourceContentView;
-import src.view.SideBar.DonutView;
 
 import javax.swing.*;
 import java.awt.event.*;

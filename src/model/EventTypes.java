@@ -5,7 +5,7 @@ public enum EventTypes {
     LSB_ENCODE,
     LSB_DECODE,
     LSB_SET_SOURCE,
-    LSB_ENCODED_CHANGED,
+    LSB_ENCODED_SET,
     LSB_ENCODED_REMOVED,
     LSB_DECODED_CHANGED,
     // TargetFile events

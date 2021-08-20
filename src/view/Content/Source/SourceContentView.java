@@ -34,14 +34,13 @@ public class SourceContentView extends JPanel implements EventListener {
         SourceContentController controller = new SourceContentController(LSBStegnographyModel.getInstance(), this);
         this.addMouseListener(controller);
         // Subscribe to model
-        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODE, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
     }
 
     @Override
     public void onEvent(EventTypes eventType, Object model) {
-
         switch (eventType) {
-            case LSB_ENCODE:
+            case LSB_ENCODED_SET:
                 ImageStegnographyModel imageStegnographyModel = (ImageStegnographyModel)model;
                 File encodedFile = imageStegnographyModel.getEncoded();
                 setImage(new ImageIcon((new ImageIcon(encodedFile.getAbsolutePath())).getImage().getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT)));
@@ -57,10 +56,14 @@ public class SourceContentView extends JPanel implements EventListener {
     private void setImage(ImageIcon img) {
         this.removeAll();
         this.add(new JLabel(img), BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
 
     private void removeImage() {
         this.removeAll();
         this.add(new JLabel(pngImage), BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
 }

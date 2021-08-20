@@ -11,4 +11,4 @@ r:
 	java $(FLAGS_R) src/Main
 
 clean:
-	rm **/*.class
+	rm -rfv bin/*

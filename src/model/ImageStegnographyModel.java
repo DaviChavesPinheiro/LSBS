@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -18,18 +19,16 @@ public abstract class ImageStegnographyModel {
     }
 
     // Set source image
-    public void setSource(String path) throws Exception {
-        File file = new File(path);
-        BufferedImage image = ImageIO.read(file);
-        if(image == null) throw new Exception("[Error]: File is not an image.");
-        this.source = file;
-    }
-    // Set source image
     public void setSource(File file) throws Exception {
         BufferedImage image = ImageIO.read(file);
         if(image == null) throw new Exception("[Error]: File is not an image.");
         this.source = file;
-        setEncoded(file);
+        // Create a temp file
+        File tempFile = File.createTempFile("LSBS-", "-endodedFile.png");
+        Files.copy(source.toPath(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        
+        // Set temp file as encodedFile
+        setEncoded(tempFile);
     }
 
     // Remove source image
@@ -44,7 +43,7 @@ public abstract class ImageStegnographyModel {
 
     public void setEncoded(File file) {
         this.endodedFile = file;
-        events.notify(EventTypes.LSB_ENCODE, this);
+        events.notify(EventTypes.LSB_ENCODED_SET, this);
     }
 
     public void removeEncoded() {
