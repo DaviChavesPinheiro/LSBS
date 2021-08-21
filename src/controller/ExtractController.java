@@ -13,7 +13,9 @@ public class ExtractController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            lsbStegnographyModel.decode();
+            if(lsbStegnographyModel.getEncoded() != null) {
+                lsbStegnographyModel.decode();
+            }
         } catch (Exception err) {
             System.out.println(err.getMessage());
         } 

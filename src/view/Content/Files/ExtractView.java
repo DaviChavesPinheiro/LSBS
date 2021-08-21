@@ -8,11 +8,14 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import src.controller.ExtractController;
+import src.model.EventListener;
+import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
 
 import java.awt.*;
 
-public class ExtractView extends JButton {
+public class ExtractView extends JButton implements EventListener {
+    private boolean enabled = false;
     public ExtractView() {
         super();
         this.setPreferredSize(new Dimension(80, 80));
@@ -43,18 +46,41 @@ public class ExtractView extends JButton {
         
         ExtractController controller = new ExtractController(LSBStegnographyModel.getInstance());
         this.addActionListener(controller);
+
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_REMOVED, this);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        if (getModel().isPressed()) {
-            g.setColor((new Color(41, 41, 41)));
-        } else if (getModel().isRollover()) {
-            g.setColor((new Color(41, 41, 41)));
+        if(!enabled) {
+            g.setColor(new Color(12, 12, 12));
         } else {
-            g.setColor(getBackground());
+            if (getModel().isPressed()) {
+                g.setColor((new Color(41, 41, 41)));
+            } else if (getModel().isRollover()) {
+                g.setColor((new Color(41, 41, 41)));
+            } else {
+                g.setColor(getBackground());
+            }
         }
         g.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(g);
+    }
+
+    @Override
+    public void onEvent(EventTypes eventType, Object model) {
+        switch (eventType) {
+            case LSB_ENCODED_SET:
+                this.enabled = true;
+                this.repaint();
+                break;
+            case LSB_ENCODED_REMOVED:
+                this.enabled = false;
+                this.repaint();
+                break;
+            default:
+                break;
+        }
     }
 }
