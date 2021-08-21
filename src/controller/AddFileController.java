@@ -27,16 +27,18 @@ public class AddFileController implements ActionListener {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             // Adiciona os arquivos selecionados
             File[] selectedFiles = fileChooser.getSelectedFiles();
-            try {
-                for(File file: selectedFiles) {
+
+            for(File file: selectedFiles) {
+                try {
                     lsbStegnographyModel.targetFile.addSubFile(file);
+                } catch (Exception err) {
+                    System.out.println(1);
+                    System.out.println(err);
                 }
-            } catch (Exception err) {
-                System.out.println(err.getMessage());
-            } finally {
-                // Faz o encode de todos os arquivos
-                lsbStegnographyModel.encode();
             }
+            
+            // Faz o encode de todos os arquivos
+            lsbStegnographyModel.encode();
         }
     }
 
