@@ -6,9 +6,9 @@ import java.nio.file.Path;
 import javax.swing.*;
 
 import src.controller.DownloadController;
-import src.model.EventListener;
-import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
+import src.utils.EventListener;
+import src.utils.EventTypes;
 import src.utils.ImageEffects;
 
 public class DownloadButtonView extends JButton implements EventListener {

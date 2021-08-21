@@ -1,4 +1,4 @@
-package src.model;
+package src.utils;
 
 public enum EventTypes {
     // Stegnography events

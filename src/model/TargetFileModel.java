@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.*;
 
+import src.utils.EventManeger;
+import src.utils.EventTypes;
+
 // TargetFile represents a file (zip) with multiples sub files
 public class TargetFileModel {
     private File targetFile;

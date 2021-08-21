@@ -2,6 +2,7 @@ package src.model;
 import javax.imageio.ImageIO;
 
 import src.utils.BytesOperations;
+import src.utils.EventTypes;
 
 import java.io.File;
 import java.io.FileOutputStream;

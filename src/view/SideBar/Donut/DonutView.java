@@ -4,10 +4,10 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-import src.model.EventListener;
-import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
 import src.model.TargetFileModel;
+import src.utils.EventListener;
+import src.utils.EventTypes;
 public class DonutView extends JPanel implements EventListener {
     private DonutContentView text;
     private long maxSpace = 0;

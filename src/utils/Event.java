@@ -1,4 +1,4 @@
-package src.model;
+package src.utils;
 
 public class Event {
     EventTypes type;

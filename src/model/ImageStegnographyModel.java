@@ -1,6 +1,9 @@
 package src.model;
 import javax.imageio.ImageIO;
 
+import src.utils.EventManeger;
+import src.utils.EventTypes;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

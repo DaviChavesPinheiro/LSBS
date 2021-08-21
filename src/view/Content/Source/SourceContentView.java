@@ -2,10 +2,10 @@ package src.view.Content.Source;
 import javax.swing.*;
 
 import src.controller.SourceContentController;
-import src.model.EventListener;
-import src.model.EventTypes;
 import src.model.ImageStegnographyModel;
 import src.model.LSBStegnographyModel;
+import src.utils.EventListener;
+import src.utils.EventTypes;
 
 import java.awt.*;
 import java.io.File;

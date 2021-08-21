@@ -1,10 +1,10 @@
 package src.view.Content.Files;
 import javax.swing.*;
 
-import src.model.EventListener;
-import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
 import src.model.TargetFileModel;
+import src.utils.EventListener;
+import src.utils.EventTypes;
 
 import java.awt.*;
 import java.io.File;
