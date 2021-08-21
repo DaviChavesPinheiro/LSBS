@@ -1,4 +1,4 @@
-package src.model;
+package src.utils;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;

@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-import src.model.ByteConverter;
+import src.utils.ByteConverter;
 
 public class DonutContentView extends JLabel{
     public DonutContentView() {

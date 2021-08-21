@@ -11,11 +11,13 @@ import src.controller.ExtractController;
 import src.model.EventListener;
 import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
+import src.utils.ImageEffects;
 
 import java.awt.*;
 
 public class ExtractView extends JButton implements EventListener {
     private boolean enabled = false;
+    Icon img, imgFocused;
     public ExtractView() {
         super();
         this.setPreferredSize(new Dimension(80, 80));
@@ -33,7 +35,8 @@ public class ExtractView extends JButton implements EventListener {
         this.setIconTextGap(6);
 
         Path imgAbsPath = Path.of("src/images/file-icon.png").toAbsolutePath();
-        ImageIcon img = new ImageIcon(imgAbsPath.toString());
+        img = new ImageIcon(imgAbsPath.toString());
+        imgFocused = ImageEffects.changeBrightness(img, 1.5f);
         this.setIcon(img);
 
         Border line = new LineBorder(new Color(56, 56, 56));
@@ -58,10 +61,16 @@ public class ExtractView extends JButton implements EventListener {
         } else {
             if (getModel().isPressed()) {
                 g.setColor((new Color(41, 41, 41)));
+                this.setForeground(new Color(125, 125, 125));
+                this.setIcon(imgFocused);
             } else if (getModel().isRollover()) {
                 g.setColor((new Color(41, 41, 41)));
+                this.setForeground(new Color(125, 125, 125));
+                this.setIcon(imgFocused);
             } else {
                 g.setColor(getBackground());
+                this.setForeground(new Color(76, 76, 76));
+                this.setIcon(img);
             }
         }
         g.fillRect(0, 0, getWidth(), getHeight());

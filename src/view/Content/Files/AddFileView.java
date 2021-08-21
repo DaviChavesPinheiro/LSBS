@@ -9,10 +9,12 @@ import javax.swing.border.*;
 
 import src.controller.AddFileController;
 import src.model.LSBStegnographyModel;
+import src.utils.ImageEffects;
 
 import java.awt.*;
 
 public class AddFileView extends JButton {
+    Icon img, imgFocused;
     public AddFileView() {
         super();
         this.setPreferredSize(new Dimension(80, 80));
@@ -30,7 +32,8 @@ public class AddFileView extends JButton {
         this.setIconTextGap(6);
 
         Path imgAbsPath = Path.of("src/images/add-icon.png").toAbsolutePath();
-        ImageIcon img = new ImageIcon(imgAbsPath.toString());
+        img = new ImageIcon(imgAbsPath.toString());
+        imgFocused = ImageEffects.changeBrightness(img, 1.5f);
         this.setIcon(img);
 
         Border line = new LineBorder(new Color(56, 56, 56));
@@ -49,10 +52,16 @@ public class AddFileView extends JButton {
     protected void paintComponent(Graphics g) {
         if (getModel().isPressed()) {
             g.setColor((new Color(41, 41, 41)));
+            this.setForeground(new Color(125, 125, 125));
+            this.setIcon(imgFocused);
         } else if (getModel().isRollover()) {
             g.setColor((new Color(41, 41, 41)));
+            this.setForeground(new Color(125, 125, 125));
+            this.setIcon(imgFocused);
         } else {
             g.setColor(getBackground());
+            this.setForeground(new Color(76, 76, 76));
+            this.setIcon(img);
         }
         g.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(g);

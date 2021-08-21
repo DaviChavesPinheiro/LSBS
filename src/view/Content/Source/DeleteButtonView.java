@@ -6,9 +6,13 @@ import java.nio.file.Path;
 import javax.swing.*;
 
 import src.controller.DeleteController;
+import src.model.EventListener;
+import src.model.EventTypes;
 import src.model.LSBStegnographyModel;
+import src.utils.ImageEffects;
 
-public class DeleteButtonView extends JButton {
+public class DeleteButtonView extends JButton implements EventListener {
+    ImageIcon img;
     public DeleteButtonView() {
         super();
         this.setPreferredSize(new Dimension(15, 15));
@@ -18,7 +22,7 @@ public class DeleteButtonView extends JButton {
         this.setOpaque(false);
 
         Path imgAbsPath = Path.of("src/images/delete-icon.png").toAbsolutePath();
-        ImageIcon img = new ImageIcon(imgAbsPath.toString());
+        img = new ImageIcon(imgAbsPath.toString());
         this.setIcon(img);
 
         this.setBorderPainted(false);
@@ -27,18 +31,22 @@ public class DeleteButtonView extends JButton {
         
         DeleteController controller = new DeleteController(LSBStegnographyModel.getInstance());
         this.addActionListener(controller);
+
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_SET, this);
+        LSBStegnographyModel.getInstance().events.subscribe(EventTypes.LSB_ENCODED_REMOVED, this);
     }
 
-    // @Override
-    // protected void paintComponent(Graphics g) {
-    //     if (getModel().isPressed()) {
-    //         g.setColor((new Color(41, 41, 41)));
-    //     } else if (getModel().isRollover()) {
-    //         g.setColor((new Color(41, 41, 41)));
-    //     } else {
-    //         g.setColor(getBackground());
-    //     }
-    //     g.fillRect(0, 0, getWidth(), getHeight());
-    //     super.paintComponent(g);
-    // }
+    @Override
+    public void onEvent(EventTypes eventType, Object model) {
+        switch (eventType) {
+            case LSB_ENCODED_SET:
+                this.setIcon(ImageEffects.changeBrightness(img, 1.8f));
+                break;
+            case LSB_ENCODED_REMOVED:
+                this.setIcon(ImageEffects.changeBrightness(img, 1f));
+                break;
+            default:
+                break;
+        }
+    }
 }

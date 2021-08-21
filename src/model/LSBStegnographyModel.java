@@ -1,6 +1,8 @@
 package src.model;
 import javax.imageio.ImageIO;
 
+import src.utils.BytesOperations;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -19,12 +21,12 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
         try {
             BufferedImage image = ImageIO.read(this.source);
             byte[] targetFileBytes = targetFile.getFileBytes();
-            byte[] bytes = UtilsModel.concatArrays(new byte[4], targetFileBytes);
+            byte[] bytes = BytesOperations.concatArrays(new byte[4], targetFileBytes);
 
-            bytes[0] = UtilsModel.getByte(targetFileBytes.length, 3);
-            bytes[1] = UtilsModel.getByte(targetFileBytes.length, 2);
-            bytes[2] = UtilsModel.getByte(targetFileBytes.length, 1);
-            bytes[3] = UtilsModel.getByte(targetFileBytes.length, 0);
+            bytes[0] = BytesOperations.getByte(targetFileBytes.length, 3);
+            bytes[1] = BytesOperations.getByte(targetFileBytes.length, 2);
+            bytes[2] = BytesOperations.getByte(targetFileBytes.length, 1);
+            bytes[3] = BytesOperations.getByte(targetFileBytes.length, 0);
 
             for (int bn = 0; bn < bytes.length * 8; bn++) {
                 int pn = Math.floorDiv(bn, 3);
@@ -33,9 +35,9 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
                 int color = image.getRGB(imageX, imageY);
 
                 int byt = bytes[bn >> 3];
-                int bit = UtilsModel.getBit(byt, 7 - (bn % 8));
+                int bit = BytesOperations.getBit(byt, 7 - (bn % 8));
 
-                color = UtilsModel.setBit(color, bit, (2 - (bn % 3)) * 8);
+                color = BytesOperations.setBit(color, bit, (2 - (bn % 3)) * 8);
 
                 image.setRGB(imageX, imageY, color);
             }
@@ -67,10 +69,10 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
 
                 int bytn = bn >> 3;
 
-                bytes[bytn] = (byte)UtilsModel.setBit(bytes[bytn], UtilsModel.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
+                bytes[bytn] = (byte)BytesOperations.setBit(bytes[bytn], BytesOperations.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
-            int hideFileSize = UtilsModel.bytesToInt(bytes);
+            int hideFileSize = BytesOperations.bytesToInt(bytes);
 
             bytes = new byte[hideFileSize];
 
@@ -82,7 +84,7 @@ public class LSBStegnographyModel extends ImageStegnographyModel {
 
                 int bytn = bn >> 3;
 
-                bytes[bytn - 4] = (byte)UtilsModel.setBit(bytes[bytn - 4], UtilsModel.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
+                bytes[bytn - 4] = (byte)BytesOperations.setBit(bytes[bytn - 4], BytesOperations.getBit(color, (2 - (bn % 3)) * 8), (7 - (bn % 8)));
             }
 
             if(decodedFile != null) decodedFile.delete();

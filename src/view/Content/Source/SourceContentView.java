@@ -12,7 +12,7 @@ import java.io.File;
 import java.nio.file.Path;
 
 public class SourceContentView extends JPanel implements EventListener {
-    private ImageIcon pngImage;
+    private ImageIcon img;
 
     public SourceContentView() {
         this.setOpaque(true);
@@ -20,8 +20,8 @@ public class SourceContentView extends JPanel implements EventListener {
         this.setLayout(new BorderLayout());
         
         Path imgAbsPath = Path.of("src/images/png-icon.png").toAbsolutePath();
-        pngImage = new ImageIcon(imgAbsPath.toString());
-        setImage(pngImage);
+        img = new ImageIcon(imgAbsPath.toString());
+        setImage(img);
         
         SourceContentController controller = new SourceContentController(LSBStegnographyModel.getInstance(), this);
         this.addMouseListener(controller);
@@ -55,7 +55,7 @@ public class SourceContentView extends JPanel implements EventListener {
 
     private void removeImage() {
         this.removeAll();
-        this.add(new JLabel(pngImage), BorderLayout.CENTER);
+        this.add(new JLabel(img), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }
