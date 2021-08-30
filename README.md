@@ -3,7 +3,6 @@
 - Paulo Ricardo Fernandes Rodrigues - 496094
 - Kaio Queiroga Cordeiro Marques - 501738
 - Jose Lucas Silva Marques - 497542
-- Jeová Saldanha da Silva - 495111
 
 ***
 
